@@ -1,0 +1,2 @@
+VALUES ($1, $2, $3): These are placeholders for the values we're inserting. $1 will be replaced with email, $2 with username, etc. This prevents SQL injection.
+RETURNING *: Tells PostgreSQL to return the complete newly created row, including auto-generated fields like id.

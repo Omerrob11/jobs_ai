@@ -1,0 +1,114 @@
+MVC: Model View Controller
+- models: handle data and buisness logic
+  - buisness logic means createing users, getting user ,etc
+- defines database schema and relationships
+- interact with the database
+
+-Controllers:
+  - process incoming requests (handle requests and coordinate between models and views)
+  - work with models to handle data
+    - get the data from "models", sends it to views to show the data
+  - send response back to clients
+  - coordinate between view and models
+
+- View:
+  - Present the data to the customers
+    - handles the presentation layer, determine how the data is displayed to users
+    - usually template engines like ejs
+  - backthen we use html templates rendered on the server
+  - server actually handle the presentation.
+
+- Routes:
+  - Define api endpoints
+  - connect url to controller functions
+
+  In modern application:
+  - we use react to handle all the view logic, user interface, ui state
+  - we this structure:
+  - models to handle data and buisness logic
+  - conrtollers to process api requests and send json responses
+  - views transformes into api responses (json data) instead of html template
+  - the backend becomes an api server, return a json response, and then react can take that json and render it
+
+
+// http://localhost:3000
+// localhost: this computer
+// 3000 its port, and we can access different routes.
+
+// ports: your computer have different addresses (computer is like a building), port 3000, port 5000 (ports are like rooms in the building)
+// 3000 is how we get to a specific adress, and it common for dev server
+// so ports, are just different routes we use to host different application?
+// each applicaiton needs their own doors to get requests - we send requests to those door
+// each time we make a requests (going to the route), so we make it to that adress, and the server listen to that adress and sends a response
+
+// .env variables: variables only the application can read
+// it stays on your computer, no one can see them
+// we will get them differently when deploying.
+
+// enviorments:
+// dev enviorment is where we write and test your code on your local computer
+// staging enviorment: its mirroring production, to test everything before make it public
+// production enviorment: live application real users can interact with.
+
+// each enviorments will be different, like different error message, different data base coneciton
+
+// Event driven:
+// after something is happend, please do the next function
+// after we read a file, please print the file contents
+
+// async event driven means:
+// you will not know which line will run, because the line (functions) will run in response to events
+// async: we can do tasks asyncournesly, so we don't need to wait for task to complete
+// when they are complete, they will fire an event, that will run the next function
+// meaning, event driven means that when something happens (for example, something hands), run/call the next function
+// like even listener - when you click on a button, do something. when network requests happens, do something
+// we will use callback - functions as paramaters, and each time something happens, we will run the callback
+
+Middlewares:
+Middleware in Express is like checkpoints or filters that your request goes through before reaching the final route handler. 
+the request is go through this before going to the route handler
+
+can:
+- execute code
+- end the request-response cycle
+- modify req/res object
+- call the next middleware
+
+// A. Application-level (for all routes)
+// app.use((req, res, next) => {
+//     console.log('Time:', Date.now());
+//     next();
+// );
+
+// B. Router-level (for specific route group)
+// router.use((req, res, next) => {
+//     console.log('Auth Route accessed');
+//     next(); // continue to the route handler
+// );
+
+// Example flow:
+// Request to /auth/register ->
+// 1. Hits router.use middleware
+// 2. Logs "Auth Route accessed"
+// 3. next() sends it to /register route handler
+// in router level middelware, next() will be the correct path, right?
+
+// C. Route-specific (for single route)
+// router.post('/register', middleware1, middleware2, controller);
+
+
+Middlware vs contoller:
+- a controller is like a middleware, that gets req/res
+- but its a special type - it actualy ends the req-res cycle, and not call next()
+
+
+A middleware can do one of three things:
+
+next(): Continue to next middleware/handler
+next(error): Skip all remaining middleware and go straight to error handler
+res.send/json/etc: End the cycle immediately by sending response
+
+
+endpoints:
+- you can call endpoints not only by being there on the brosewr, but also
+in a click of a button

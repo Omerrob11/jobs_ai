@@ -1,0 +1,13 @@
+-- Basic SQL structure:
+SELECT [columns] FROM [table] WHERE [condition];
+INSERT INTO [table] (columns) VALUES (values);
+UPDATE [table] SET [column=value] WHERE [condition];
+DELETE FROM [table] WHERE [condition];
+
+-- Examples:
+SELECT email, username FROM users WHERE id = 1;
+INSERT INTO users (email, username) VALUES ('test@test.com', 'john');
+UPDATE users SET email = 'new@test.com' WHERE id = 1;
+DELETE FROM users WHERE id = 1;
+
+-- command, table name, col

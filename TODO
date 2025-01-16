@@ -1,0 +1,31 @@
+// TODO:
+// set up authentication routs
+//  configure database connecection
+
+// create registiration route
+// hash the password (bcrypt for hashing)
+// store the user
+
+// On form - need to sanitaize and validate:
+// anitization and validation out here
+
+/*
+
+Traditional Server-Side Rendering:
+
+javascriptCopy// Express renders templates
+app.get("/sign-up", (req, res) => res.render("sign-up-form"));
+
+
+
+React (Single Page Application):
+
+javascriptCopy// Frontend (React handles routing and rendering)
+<Route path="/sign-up">
+    <SignUpForm />
+</Route>
+
+// Backend (Express just handles API endpoints)
+app.post("/api/auth/register", validateInput, checkExistingUser, ...);
+
+*/

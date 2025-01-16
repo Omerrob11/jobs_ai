@@ -1,0 +1,36 @@
+When you type psql alone:
+
+It tries to connect using your system username (in your case omermiloh)
+To the database with the same name as your username
+
+-U, --username=USERNAME # Database user name (you already know this one)
+-d, --dbname=DBNAME # Database name to connect to
+-h, --host=HOSTNAME # Database server host or socket directory
+-p, --port=PORT # Database server port (default: 5432)
+-W, --password # Force password prompt
+-w, --no-password # Never prompt for password
+-c, --command=COMMAND # Run a single command and exit
+-f, --file=FILENAME # Execute commands from file
+-l, --list # List available databases
+
+psql # Connects as omermiloh to omermiloh database
+psql -U postgres # Connects as postgres user
+psql -d mydb # Connects to mydb database
+psql -h localhost # Connects to local server explicitly
+psql -p 5433 # Connects to port 5433 instead of default 5432
+psql -l # Lists all databases
+
+ok tell me something.
+
+psql connets to the database server as the system username
+
+psql -U postgres connetcts to the database server as postgres user.
+
+but it only make sense if we have postegres user(role).
+
+even if we have a postgres table, but not user, it will not work right?
+
+and psql, will connect with the "superuser" ?
+
+psql # Works (connects as omermiloh)
+psql -U omermiloh # Works (same as above)

@@ -1,0 +1,74 @@
+Authentication:
+json web tokens - create an encrypted token containing user data.
+client store the token, server doesnt store session data
+
+Database: postgresql, relational database:
+- tables store data in rows and columns
+- foreign keys esablish relationships between tables
+- rich data types (json, arrays, etc)
+Relational database: tables are related to each other through references
+Help us to get related data - get all posts by this user id.
+Help us enforce rules - a ceratin post should have a user id attach to it
+
+- We authenticate to postgresql by roles
+
+- posegrsql is a database server, that runs on your computer
+- we need to start the server, meaning runs it in the backeground - we turn on a local database server on your machine
+- we can acess it at first from our computer, and it is stored in the hardrive
+- databases are protected by the user authentiocation, not exposed to the internt
+- connection to postegrsql, we just connect to this local server
+
+databases:
+- we should create new databases for our project.
+- postgres =# : "postegrs" is the name of the database, "=" connecte as a superuser, "#" ready to recieve commands
+- omermiloh=#: you are connnecetd to a database named omermiloh, and can get command prompts. logged in as adming, can create sql commands
+- omermiloh=-: incomplete command.
+commands:
+- psql postgres: connects to a postegrsql database server as the current mac user - postegrs refers is the default database
+mening, we are authenticate to the default user by mac
+you also connecting to the database named "postegrs"
+
+- psql
+  - get you into the postegrsql prompt, you can exit it with \q
+  - its the postgredql interactive terminal
+  - without nothing, it connect to a database matching your username, and using the operating username as the postegrsql role (user)
+
+posegrsql:
+- if you try to connect without a specifiying database, posegrsql will connect you to a database that match your mac username
+- psql authenticate you as the role "omermiloh", the role of your username, and then connect you to a database name this
+- like go to the office building to your cubical - you go with psql, the guard authenticate you, and direct you to ur cubical
+psql  # Without a matching database
+# Error: database "john" does not exist
+
+
+authentication:
+- we will need to set up a password for our new role to protecet the data
+- we make the password for the roles - we will use it from connecting from application or remote computers
+General:
+- brew is a package manager for mac os, like npm. app store for developers
+- enviormental variables: secret notes that only your computer can read.
+
+Server:
+- take requests from computers, process, and return a response
+- database server: it take queries, and serves data. the "api" is the database
+
+
+
+Enviorment:
+- we can save the aces into the enviorment to acess later.
+- we can save the password to the enviorment, in our case: DATABASE_PASSWORD
+
+
+Migrations:
+- basically, version control for your database
+- help you identify how the database is changing
+
+
+Models:
+- database is different from buisness modles
+
+
+
+superuser:
+- superuser is the role with full administrative priviliges:
+  - can do anything to database, other roles, etc.
