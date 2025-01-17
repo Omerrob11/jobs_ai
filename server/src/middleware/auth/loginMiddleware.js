@@ -1,6 +1,8 @@
 const pool = require("../../models/database");
 const jwt = require("jsonwebtoken");
 
+const bcrypt = require("bcrypt");
+
 const validateUserCred = (req, res, next) => {
   const { username, password } = req.body;
 
@@ -54,6 +56,33 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
-const userTokenCreation = async (req, res, next) => {};
+const generateToken = async (req, res, next) => {
+  console.log("Starting generateToken");
+  console.log("User id:", req.user.id);
+  const userId = req.user.id;
 
-module.exports = { validateUserCred, verifyUser };
+  // data stored in the token
+  const payload = {
+    userId: userId,
+  };
+
+  console.log("Payload:", payload); // Check payload
+  console.log("JWT_SECRET:", process.env.JWT_SECRET); //
+  try {
+    console.log("Attempting to generate token");
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "72h",
+    });
+    console.log("Token generated:", token);
+
+    req.token = token;
+    console.log("post req.token");
+    next();
+  } catch (error) {
+    console.error("Token generation error:", error);
+
+    return next(error);
+  }
+};
+
+module.exports = { validateUserCred, verifyUser, generateToken };

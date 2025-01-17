@@ -34,8 +34,10 @@ const registerHandler = async (req, res, next) => {
 };
 
 const loginHandler = async (req, res, next) => {
-  try {
-  } catch (error) {}
+  res.json({
+    token: req.token,
+    message: "התחברת בהצלחה",
+  });
 };
 
 module.exports = { registerHandler, loginHandler };

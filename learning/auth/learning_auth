@@ -19,8 +19,21 @@ JSON web tokens: JWT:
   - header, payload (data), signature
   - we encode it to be long string
   - should not have sensetive data
+- you can set expiration date, so he won't need to log in again
 - each user get a token, json web token, its like their own id
-- they use it with each requests, so we can identify it - it contain information about them
+- they use it with each requests, so we can identify it - it contain information about them - we will verify who they are, so we wont need password each requests
+
+Without a secret key:
+
+Anyone could create a fake ticket (token) with any userId
+They could just write { userId: 123 } and claim to be any user
+There's no way to verify if the ticket is genuine
+
+With a secret key:
+
+The token is like a ticket with a special watermark (signature)
+Only your server knows the secret to create this watermark
+If someone tries to create a fake token (ticket), they won't have the right watermark
 
 Authentication flows:
 Registration:

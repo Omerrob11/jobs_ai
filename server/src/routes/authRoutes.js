@@ -19,6 +19,7 @@ const {
 const {
   validateUserCred,
   verifyUser,
+  generateToken,
 } = require("../middleware/auth/loginMiddleware");
 
 const {
@@ -34,7 +35,13 @@ router.post(
   registerHandler
 );
 
-router.post("/login", validateUserCred, verifyUser, loginHandler);
+router.post(
+  "/login",
+  validateUserCred,
+  verifyUser,
+  generateToken,
+  loginHandler
+);
 
 router.get("/signin", (req, res) => {
   // the callback function is what happen after we go to /sign route
