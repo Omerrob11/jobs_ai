@@ -14,7 +14,7 @@ const {
   validateInput,
   checkExistingUser,
   hashPassword,
-} = require("../middleware/authMiddleware");
+} = require("../middleware/auth/registerMiddleware");
 
 const { register } = require("../controllers/authController");
 // going to web broswer make get request, not post
@@ -25,6 +25,8 @@ router.post(
   hashPassword,
   register
 );
+
+router.post("/login", validateUserCred);
 
 router.get("/signin", (req, res) => {
   // the callback function is what happen after we go to /sign route

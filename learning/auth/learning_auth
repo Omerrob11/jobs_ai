@@ -1,5 +1,6 @@
 Auth fundamentals:
 endpoints:
+
 - endpoints are interafaces to your backend application.
 - this is the way for users to interact with our backend/database
 - its the mechanisem which users interact with the backend
@@ -8,37 +9,38 @@ endpoints:
 - and a http method
 
 pwd security:
+
 - never store plain passwords in db, we will use hashing, which is a transformation of the password
 - we will use bcrypt library
 
-
 JSON web tokens: JWT:
+
 - each user get a token, json web token, its like their own id
 - they use it with each requests, so we can identify it - it contain information about them
 
-
 Authentication flows:
 Registration:
+
 - user send email and password
 - we hashes the pws
 - store in the database users
 - CREATE a jwt json web token in register - Instead of making them log in right after, we give them a token
 
 login:
+
 - user sends email pwd
-- server checks hashed password
+- server checks hashed password - compare between hashed pwd to user pwd
 - if correct, create a token
 - send the token to the user
 - user store the token in local storage
 - user make request with the token in header
 - server verifies token -> knows who the users is
 
-
 Protected routs:
+
 - user sends reuqets with token
 - server verifies token
 - if valid, allow acess
-
 
 app flow:
 register:
@@ -47,12 +49,9 @@ endpoint -> check if its valid(name,email,pwd) -> pwd hashing -> store the user 
 login:
 endpoint -> check credentials -> create a token -> send token to user -> redirect to app
 
-
 JWT:
 
-
 What is JWT and why we need it:
-
 
 JWT is a way to securely transmit information between parties (client and server)
 It's like a secure ID card that:

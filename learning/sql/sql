@@ -1,2 +1,9 @@
 VALUES ($1, $2, $3): These are placeholders for the values we're inserting. $1 will be replaced with email, $2 with username, etc. This prevents SQL injection.
 RETURNING *: Tells PostgreSQL to return the complete newly created row, including auto-generated fields like id.
+
+
+About $1:
+This is PostgreSQL's way of using parameterized queries. 
+Instead of directly putting values in the query (which could lead to SQL injection), we use placeholders:
+$1 means "first parameter"
+$2 would mean "second parameter"

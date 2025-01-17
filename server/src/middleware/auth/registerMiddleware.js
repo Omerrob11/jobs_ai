@@ -1,7 +1,7 @@
 // what about error handling?
 // what is req.body? how we send information in the req object?
 
-const pool = require("../models/database");
+const pool = require("../../models/database");
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10; // Make sure this is defined
 
