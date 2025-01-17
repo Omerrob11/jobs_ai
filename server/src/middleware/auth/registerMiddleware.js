@@ -6,8 +6,6 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10; // Make sure this is defined
 
 const validateRegistration = (req, res, next) => {
-  console.log("Inside validateInput:", req.body); // See if we get here
-
   // req.body is the actual data the http request have - from client request
   // params/query are belongs to the path.
   const { email, password, username } = req.body;
@@ -34,6 +32,7 @@ const validateRegistration = (req, res, next) => {
   if (username.length < 3) {
     const error = new Error("שם משתמש חייב להיות לפחות 3 ספרות");
     error.status = 400;
+    // error handler middleware will catch it
     throw error;
   }
 

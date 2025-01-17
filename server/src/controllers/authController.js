@@ -6,7 +6,7 @@ const { createUser } = require("../models/userModel");
 // Tasks:
 // 1. create the user to the database
 // return sucsuss or failule
-const register = async (req, res, next) => {
+const registerHandler = async (req, res, next) => {
   console.log("Inside register controller"); // See if we get here
 
   try {
@@ -33,4 +33,9 @@ const register = async (req, res, next) => {
   }
 };
 
-module.exports = { register };
+const loginHandler = async (req, res, next) => {
+  try {
+  } catch (error) {}
+};
+
+module.exports = { registerHandler, loginHandler };

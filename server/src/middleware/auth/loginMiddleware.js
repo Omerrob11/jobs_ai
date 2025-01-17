@@ -1,12 +1,17 @@
 const pool = require("../../models/database");
+const jwt = require("jsonwebtoken");
 
 const validateUserCred = (req, res, next) => {
   const { username, password } = req.body;
 
+  // best practice
   if (!username || !password) {
     const error = new Error("חובה להכניס גם שם משתמש וגם ססמא");
     error.status = 400;
-    throw error;
+    // make sure the other next() will not run
+    // no need for try / catch, we can just return next(error)
+    // in a try/catch clause, we will just use next(error)
+    return next(error);
   }
 
   next();
@@ -25,7 +30,8 @@ const verifyUser = async (req, res, next) => {
       [username]
     );
     if (userName.rows.length === 0) {
-      res.status(401).json({ error: "שם משתמש או סיסמא אינם תקינים" });
+      // we return to not continue the function - there is code later
+      return res.status(401).json({ error: "שם משתמש או סיסמא אינם תקינים" });
     }
 
     const isMatch = await bcrypt.compare(
@@ -36,5 +42,18 @@ const verifyUser = async (req, res, next) => {
     if (!isMatch) {
       return res.status(401).json({ error: "שם משתמש או סיסמא אינם תקינים" });
     }
-  } catch (error) {}
+
+    // {id:1, username:"john_Dow", ...} - all the filed we get from the database
+
+    // saving the user information in the req object
+    req.user = userName.rows[0];
+
+    next();
+  } catch (error) {
+    return next(error);
+  }
 };
+
+const userTokenCreation = async (req, res, next) => {};
+
+module.exports = { validateUserCred, verifyUser };

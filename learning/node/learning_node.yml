@@ -100,7 +100,8 @@ can:
 Middlware vs contoller:
 - a controller is like a middleware, that gets req/res
 - but its a special type - it actualy ends the req-res cycle, and not call next()
-
+- middleware have aces to req,res, and netx middleware function in the req-res cycle
+- next is a callback function
 
 A middleware can do one of three things:
 
@@ -112,3 +113,20 @@ res.send/json/etc: End the cycle immediately by sending response
 endpoints:
 - you can call endpoints not only by being there on the brosewr, but also
 in a click of a button
+
+
+return next(error) vs next(error):
+- if you are not returning, it will keep execute code after the next() call
+- next() you will keep executing code in the curernt middleware function after passing controls to the rest of the middlewars
+- return next() will deny any later code to be executed
+- next() is just continue to execude the current function
+
+
+Error middleware:
+- If you have an error middleware (defined with app.use(errorMiddleware)), 
+any errors thrown in middleware or route 
+handlers will automatically be caught by it. 
+This is one of Express's built-in features.
+- gets an error object
+- if you are not sending error object, it will wrap it in error object
+- best practice is to bring an error object tho

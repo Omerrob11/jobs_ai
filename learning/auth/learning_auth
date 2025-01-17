@@ -15,6 +15,10 @@ pwd security:
 
 JSON web tokens: JWT:
 
+- transmit information secuerly as a json object
+  - header, payload (data), signature
+  - we encode it to be long string
+  - should not have sensetive data
 - each user get a token, json web token, its like their own id
 - they use it with each requests, so we can identify it - it contain information about them
 
@@ -30,7 +34,7 @@ login:
 
 - user sends email pwd
 - server checks hashed password - compare between hashed pwd to user pwd
-- if correct, create a token
+- if correct, create a token contains user information
 - send the token to the user
 - user store the token in local storage
 - user make request with the token in header
