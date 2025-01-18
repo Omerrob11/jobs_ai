@@ -1,0 +1,74 @@
+SSR:
+
+- We have a template in our backend
+- that we send as a response to the user request
+- and we populate that template with values from db
+-
+
+login flow:
+
+- get the deatils, and verify the login details are correct from the db\
+
+session strategy:
+
+- we use sessions to allow user stay logged in
+- so we create a coockie that stored in the user broswer
+- cookie needs some information -maybe the user id, i dont know
+
+so there is information we want to store in the session data - the coocki
+
+- so each session has some data we have inside
+- each request if we have a matching sessions, we will get the session data id,
+  and use that id to query the db, with not other stuff
+- and we can also give the user information, so we have its data
+
+- we have "sesion cookies" that we store in the broswer
+  we will use that session coockie for all future requests
+- we send the coockies in the request object with eveery request
+- it think with each request, we will check the coockie to match the id
+
+- and if there is a cookcie, we will add the user to the request object or something
+- we will verify that user
+
+Routes:
+
+- for each functionallity with the backend
+- you will need a route for that
+- and appropriate route handler
+
+Middleware functions are functions that take the req and res objects, manipulate them, and pass them on through the rest of the app.
+
+The server:
+const app = express()
+the app is our server. express() initialize a server
+then se tell our server to listen to requests on the ports
+and local host, which is the computer local connection
+
+.env - for sercrets and easilcy changing variable value like PORT
+
+server - get request and sends response.
+
+get request to path of the server that listen to the port -> display the response
+when you go to url - you send gte requests to that path
+
+we store the request in the req object, and pass it through a chain of funstions (middleware
+we have the last middleware - which is sending the repsonse)
+
+We match requests to routes - than the routes move.
+
+meaning:
+
+1. we send a requset to the path
+2. than this path will mathces to a route in our backend application
+3. route will route it tot he correct middleware and handler
+
+order matter:
+
+- it will pass the request to the first route matched the HTTP method and path
+
+callback nature:
+
+- once we get a request, we execute the callback, that gets the req object, and the res object, and next
+
+res.send - tells the response object to respond to the request, by sending something.
+meaning the response object response to it

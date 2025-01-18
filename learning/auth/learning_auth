@@ -76,3 +76,29 @@ It's like a secure ID card that:
 Proves who the user is
 Can't be faked (it's cryptographically signed)
 Contains user information (like id, email)
+
+Cookies:
+
+Are just a storage mechanism in the browser
+Can store any data (tokens, preferences, etc.)
+Like a label the browser attaches to requests
+
+javascriptCopy// Server sets cookie
+res.cookie('theme', 'dark', {
+httpOnly: true,
+secure: true
+});
+
+JWT VS SESSIONS:
+JWT (Token-based):
+
+Stateless:
+
+Server doesn't store anything
+All user info is in the token itself
+Each request carries all needed information
+
+hash functions
+
+- maps variable sized inputs to fixed size outputs
+- meaning take an arbirtary length, and maps it to a ceratin output

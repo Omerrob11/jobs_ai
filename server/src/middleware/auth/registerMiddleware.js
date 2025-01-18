@@ -78,8 +78,10 @@ const hashPassword = async (req, res, next) => {
   console.log("validateData:", req.validateData);
   try {
     const { password } = req.validateData;
+    // salt- adding extra random char to it - change the pwd input a little bit
+    // make the output unique
     const hashedPwd = await bcrypt.hash(password, SALT_ROUNDS);
-
+    //we can also have a callback function to store it in the db
     req.validateData.hashedPassword = hashedPwd;
     console.log("are we getting to hashe password");
     next();

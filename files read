@@ -1,16 +1,17 @@
 v: installing postegrsql
 v: introduction to node
+v: authentication basics
+v: introduction to express
+
 
 needs to:
 
 - debugging node
 - enviormment variables
-- introduction to express
 - routes
 - controllers
 - views
 - deployment
 - using postersql
-- authentication basics
 - API basics
 - api security
