@@ -2,10 +2,7 @@ v: installing postegrsql
 v: introduction to node
 v: authentication basics
 v: introduction to express
-
-
 needs to:
-
 - debugging node
 - enviormment variables
 - routes
@@ -15,3 +12,38 @@ needs to:
 - using postersql
 - API basics
 - api security
+
+
+
+------- 
+-- css:
+- default styles
+- text styles
+- css units
+- advanced selectors
+- positioning
+- custom properties
+- broswer compatibillity
+- frameworks and preproccessors
+- grid section
+- transitions
+- keyframes
+- responsive design section
+- the cascade
+- the box model
+- block and inline
+- flexbox section
+
+
+how to learn the css:
+- fuck articles
+- go concept by concept, ask claude to teach you that
+- learn by doing- literally create it, and do that by doing
+- because you will need to master react
+
+I think that you can:
+- learn nodejs, next js by 15 to february - a month from now
+- and then, until 1.04, be master desginer and learn to create beautiful websites
+- you do that by creating landing pages for others, and create projects and internatl tools for you
+- create landing after landing, literally be in facebook and give the code for free
+- 800 ils for implementation
