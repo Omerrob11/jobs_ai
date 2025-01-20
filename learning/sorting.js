@@ -1,6 +1,6 @@
 // insertion sort:
 /*
-Algo:
+Algo: DATA STRUCTURES are ways to organzie data.
 - go through the all array
 - define the current item to sort (starting from index === 1)
 - as long as the index bigger than 0 and you are smaller than the index before you - swap
@@ -125,7 +125,43 @@ function bubbleSort(unsortedList) {
 }
 
 /*
-Insertion sort
+Selection sort
+- look for the minimum - go over the list in the second iteration, compare to the current minIndex
+- put it in the end of the sorted list (we found other minimum before it) - at index i;
+- increase the end of the sorted list by 1 (i iteration increased)
 
+outer loop: i === number of elements that already sorted 
+iner loop: n-i === j: number of elements needs to sort: go through the list
 
+STOP: when we reach the end of the list, because i is the index that give us the end of the sorted list.
+Time complexity: O(n^2)
+stable: no (we might swap non adjacent)
+in place: yes
 */
+
+function selectionSort(unsortedList) {
+  // i reference the end of the sorted list
+  for (let i = 0; i < unsortedList.length; i++) {
+    let minIndex = i;
+
+    for (let j = i; j < unsortedList.length; j++) {
+      if (unsortedList[minIndex] > unsortedList[j]) {
+        minIndex = j;
+      }
+    }
+    // preform a swap
+    // at index minIndex, preform a swap with i;
+
+    const temp = unsortedList[i];
+    unsortedList[i] = unsortedList[minIndex];
+    unsortedList[minIndex] = temp;
+  }
+
+  return unsortedList;
+}
+
+// Javascript sorting:
+// takes compare function, with 2 arguments, both of the items to compare
+// (a,b) => if positive, b is coming before a
+// if negative, a coming before b.
+// if 0, than the ordering remains the same

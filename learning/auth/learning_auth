@@ -22,8 +22,8 @@ JSON web tokens: JWT:
 - you can set expiration date, so he won't need to log in again
 - each user get a token, json web token, its like their own id
 - they use it with each requests, so we can identify it - it contain information about them - we will verify who they are, so we wont need password each requests
-
-Without a secret key:
+- we send the jwt token in the request header.
+  Without a secret key:
 
 Anyone could create a fake ticket (token) with any userId
 They could just write { userId: 123 } and claim to be any user
@@ -49,7 +49,7 @@ login:
 - server checks hashed password - compare between hashed pwd to user pwd
 - if correct, create a token contains user information
 - send the token to the user
-- user store the token in local storage
+- user store the token in local storage or httponly
 - user make request with the token in header
 - server verifies token -> knows who the users is
 
@@ -79,6 +79,10 @@ Contains user information (like id, email)
 
 Cookies:
 
+- smalle pieces of data stored in the broswer
+- sent with every request
+- javascript can't acess it.
+
 Are just a storage mechanism in the browser
 Can store any data (tokens, preferences, etc.)
 Like a label the browser attaches to requests
@@ -90,6 +94,11 @@ secure: true
 });
 
 JWT VS SESSIONS:
+
+Sessions:
+
+- server stores session data and sends a session id to client
+
 JWT (Token-based):
 
 Stateless:
