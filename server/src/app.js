@@ -10,8 +10,13 @@ const cookieParser = require("cookie-parser");
 //initilaize express application
 const app = express();
 const errorHandler = require("./middleware/errorMiddleware");
+const { verifyUser } = require("./middleware/auth/loginMiddleware");
+// const { verifyUserJwtToken } = require("./middleware/auth/verifyLoggedUser");
+const verifyUserJwtToken = require("./middleware/auth/verifyLoggedUser");
 
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/auth/authRoutes");
+const publicRouter = require("./routes/public/publicRoutes");
+const appRouter = require("./routes/app/appRouter");
 
 // middleware for pasring json bodies
 // meaning, we get data, and for each requests, we get the data in json, and we convert it to javascript objects
@@ -32,23 +37,12 @@ app.use(cookieParser());
 // any request to /auth will use the router
 app.use("/auth", authRoutes);
 
-app.get("/health", (req, res) => {
-  res.json({ status: "Healthy", message: "server is running propertly" });
-});
+// app prefix - this is for the protected features
+// everything udner /app/* requires authentication
+app.use("/app", verifyUserJwtToken, appRouter);
 
-app.get("/new", (req, res) => {
-  res.json({ post: "lol" });
-});
-
-app.get("/", (req, res) => {
-  console.log("users will be logged inside here");
-  // broswer show you the raw json response with res.json
-  // our frontend application will consume the response and present it later
-  res.json({
-    message: "welcome to interview prep api",
-    version: "1.0.0",
-  });
-});
+// specifi routes first, more general last
+app.use("/", publicRouter);
 
 app.use(errorHandler);
 module.exports = app;

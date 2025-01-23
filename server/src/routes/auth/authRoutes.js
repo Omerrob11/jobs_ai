@@ -14,18 +14,18 @@ const {
   validateInput,
   checkExistingUser,
   hashPassword,
-} = require("../middleware/auth/registerMiddleware");
+} = require("../../middleware/auth/registerMiddleware");
 
 const {
   validateUserCred,
   verifyUser,
   generateToken,
-} = require("../middleware/auth/loginMiddleware");
+} = require("../../middleware/auth/loginMiddleware");
 
 const {
   registerHandler,
   loginHandler,
-} = require("../controllers/authController");
+} = require("../../controllers/authController");
 // going to web broswer make get request, not post
 router.post(
   "/register",

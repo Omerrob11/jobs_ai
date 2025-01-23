@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 
-const verifyUser = (req, res, next) => {
+const verifyUserJwtToken = (req, res, next) => {
   // do to cookie parser middleware
   const token = req.cookies.token;
 
   // we need to check, becuase the user might want to go directly in the url
   // to the protected routes
   // we should redirect here to the login page probably
+
+  console.log("inside verify");
   if (!token) {
     // maybe here redirect to log in page
     // return res.status(401).json({
@@ -36,4 +38,4 @@ const verifyUser = (req, res, next) => {
   }
 };
 
-module.exports = verifyUser;
+module.exports = verifyUserJwtToken;

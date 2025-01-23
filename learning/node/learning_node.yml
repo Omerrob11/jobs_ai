@@ -130,3 +130,18 @@ This is one of Express's built-in features.
 - gets an error object
 - if you are not sending error object, it will wrap it in error object
 - best practice is to bring an error object tho
+
+
+order matters:
+- for each use() method, order is matter
+- express process routes and midleware in the process they are defined
+app.use(express.json());  // First parse any JSON body
+app.use(cookieParser()); // Then parse cookies
+
+// you need to have globale middleware first:
+// 1. Global middleware first
+app.use(express.json());
+app.use(cookieParser());
+First check if someone's trying to enter the secure area
+Then check if they're heading to the registration desk
+Finally, direct everyone else to the public areas
