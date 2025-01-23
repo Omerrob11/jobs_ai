@@ -21,6 +21,8 @@ const verifyUserJwtToken = (req, res, next) => {
   }
 
   try {
+    // i think here we could also have a function
+    // like a callabck function
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // attach username so we won't need to check again
