@@ -34,8 +34,24 @@ const registerHandler = async (req, res, next) => {
 };
 
 const loginHandler = async (req, res, next) => {
+  const cookieOptions = {
+    httpOnly: true,
+    secure: false, //for develpoment, false, production, true
+    sameSite: "strict",
+    maxAge: 72 * 60 * 60 * 1000,
+  };
+
+  // name, value assign to the cookie(jwt token), and options
+  // setting the cookie to be send
+  res.cookie("token", req.token, cookieOptions);
+
+  // cookie - will send the jwt token we use to verify the user.
+
+  // cookie will be send in the response header.
+  // Set-Cookie: token=eyJhbGciOiJIUzI1N...; HttpOnly; SameSite=Strict; Max-Age=259200000
+
+  // testing, go and actually see that with the curl command
   res.json({
-    token: req.token,
     message: "התחברת בהצלחה",
   });
 };

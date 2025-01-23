@@ -1,21 +1,24 @@
 Sessions:
+
 - server stores session data, and we create a session data, and send it to the user
-CREATE TABLE sessions (
-    session_id VARCHAR(255) PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    created_at TIMESTAMP,
-    expires_at TIMESTAMP
-);
+  CREATE TABLE sessions (
+  session_id VARCHAR(255) PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  created_at TIMESTAMP,
+  expires_at TIMESTAMP
+  );
 
 flow:
+
 - user login, we check for user name / pwd
-- create a unique session id(with duration, 1-2 weeks), maybe a remmber me functionallity- 
- and store it in the database/memory/redis
+- create a unique session id(with duration, 1-2 weeks), maybe a remmber me functionallity-
+  and store it in the database/memory/redis
 - send the session id to the broswer
 
 user request -> has session ID -> check database -> allow/deny access
 
 requets work:
+
 - broswer sends a cookie with the session id
 - the server get a request with a session id (the cookie)
 - looking up session info in storage (sql requsts probably)
@@ -23,55 +26,59 @@ requets work:
 - if not found, we ask the user to log in again.
 
 Storage:
+
 - the session ID, that the server send to the client, stored in a cookie.
 
-
 expired sessions:
-- we delete the expires sessions 
 
+- we delete the expires sessions
 
+**\*\*\*\*** Cookies: **\*\*\*\***
 
-******** Cookies: ********
 - pieces of text data stored in your broswer
 - domain specific, each webstites has its own cookies.
 - send with every request to that domain.
 
 my understanding:
-- each website has cookiets related to it 
+
+- each website has cookiets related to it
 
 why cookies:
+
 - cookies are storage mechanisem in the broswer , instead of localStorage
-instead of:
-// Frontend would need to manually store data
-localStorage.setItem('sessionId', 'abc123') (in the frontend react)
+  instead of:
+  // Frontend would need to manually store data
+  localStorage.setItem('sessionId', 'abc123') (in the frontend react)
 
 // Frontend would need to manually add to EVERY request
 fetch('/api/profile', {
-  headers: {
-    'Authorization': localStorage.getItem('sessionId')
-  }
+headers: {
+'Authorization': localStorage.getItem('sessionId')
+}
 
-  with cookies: we sets the cookies inside the server:
-  / Server sets cookie
+with cookies: we sets the cookies inside the server:
+/ Server sets cookie
 res.cookie('sessionId', 'abc123');
 
 // That's it! Browser automatically sends it with EVERY request
 // No need to write any code to send it
-fetch('/api/profile');  // Cookie is automatically included
+fetch('/api/profile'); // Cookie is automatically included
 
 you also get:
+
 - automatic sending with requests
 - automatic domain restriction and expiration handling
 - httponly - cant acess by javascript
 
 the benefit:
-- instead of store it in local storage, you get a lot of 
-things storing session data in cookies
 
+- instead of store it in local storage, you get a lot of
+  things storing session data in cookies
 
 how they works:
-- we send the cookie in response header - so we create 
-the cookies in the server, and send the response with it
+
+- we send the cookie in response header - so we create
+  the cookies in the server, and send the response with it
 - its automatically set the cookies to that domain
 - broswer store the cookie
 - for requests to that domain, we send them the coockies
@@ -83,12 +90,10 @@ Session Cookies
 Deleted when browser closes
 No expiration date set
 
-
 Persistent Cookies
 
 Have expiration date
 Stay until that date
-
 
 Third-party Cookies
 
@@ -109,7 +114,6 @@ both are storing mechanisem, where cookies is better
 
 HttpOnly Cookie vs Regular Cookie:
 
-
 // Regular Cookie - JavaScript can access this
 res.cookie('regular', 'value');
 document.cookie // Can read this cookie in frontend
@@ -118,7 +122,7 @@ document.cookie // Can read this cookie in frontend
 res.cookie('secure', 'value', { httpOnly: true });
 document.cookie // Cannot see or access this cooki
 
-***** JWT *******:
+**\*** JWT **\*\*\***:
 
 - digital passport for users
 - no need to check the database for each requests
@@ -127,32 +131,35 @@ document.cookie // Cannot see or access this cooki
   - payload :the actual data of the user: userId, username, ...
   - signature: verifies token hasn't been tampered with - a digital password, with secret key
 
-
-
 how it works:
+
 - user log in
 - server verifies credentials, and create json web tokn
-- server sends the jwt to client
-- client sends jwt with requeests
+- server create jwt token
+- server sends the jwt to client - to be stored in an httponly cookie. send it in httponly cookie
+- broswer stores cookie
+- client sends jwt with requeests: in http authrization
 - server verifies jwt signature and gets user info from the token itself
 
 difference with sessions:
+
 - no server storage needed - stateless
 - user info in token
 - server just verify signuatre
 
 with cookies:
+
 - cookie is just a storing mechanisem, for the token
 - store the jwt (the tokens) in http cookies is greate
 - protecess from XSS, automatically send with requests.
-sotage:
+  sotage:
 - local storage and send in header:
-// A. Store in localStorage and send in header
-so we need to add the token in the header
-localStorage.setItem('token', jwt);
-fetch('/api/data', {
+  // A. Store in localStorage and send in header
+  so we need to add the token in the header
+  localStorage.setItem('token', jwt);
+  fetch('/api/data', {
   headers: {
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
 
 // C. Store in HttpOnly cookie (most secure)
@@ -195,11 +202,13 @@ so, if we able to idetnify the user, meaning it exist, we give acess, if not, th
 and the main difference - here we are not interacting with the database to idetnify user, but we just use the builtin method that able to get the user data that is encrypted in the token, right?
 
 LOGIN:
+
 1. User logs in ➜ Server creates JWT with user data inside
 2. Server sends token to user
 3. User stores token (preferably in HttpOnly cookie)
 
 SUBSEQUENT REQUESTS:
+
 1. User makes request with token
 2. Server uses jwt.verify() to decode token
 3. If valid ➜ Server knows user identity from token data
@@ -209,3 +218,32 @@ KEY DIFFERENCE FROM SESSIONS:
 Sessions: Check database to identify user
 JWT: Extract user data from token itself
 
+cookies:
+
+- cookie: include in every request to the associsated domain
+- regular cookie: accesible in js
+- httponly coookie: blocked from js
+- secure: force it to only be sent over htttps and not http
+  if we respond with a cookie, its automatically save in the broswer of the clinet right? no need to do anything in the frontend.
+- it automatiaclly (The broswer), store the cookiets, and send it back with each requests
+
+Verification of user after log in:
+
+- check if the cookie exists with the token
+- verify token is valid
+- allow acess if valid, if not deny
+
+Protected routes:
+
+- we will use the verification of the user after he logged in
+- only in the protected routes:
+
+// app.js
+// Public routes - no checkpoint needed
+app.get('/', homeHandler);
+app.get('/about', aboutHandler);
+app.get('/auth/login', loginHandler);
+
+// Private routes - add the checkpoint
+app.get('/dashboard', verifyUser, dashboardHandler);
+app.get('/profile', verifyUser, profileHandler);

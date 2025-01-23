@@ -5,6 +5,7 @@ const express = require("express");
 // CORS: web broswers prevent websites from making requests to different domains
 // cors middleware make the requests possible
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 //initilaize express application
 const app = express();
@@ -20,6 +21,11 @@ app.use(express.json()); // Middleware to parse JSON
 // before passing it along. .use() do something for every requests
 // enable cors for frontend communication, allows requests from our react app
 app.use(cors());
+
+// parsing cookie hader rom incoming requests, pouplate req.cookies with object containg cookie value.
+// adding res.cookie() to respond with cookies
+// without it we would manually have to parse cookies
+app.use(cookieParser());
 
 // routers
 
