@@ -9,9 +9,13 @@ const verifyUser = (req, res, next) => {
   // we should redirect here to the login page probably
   if (!token) {
     // maybe here redirect to log in page
-    return res.status(401).json({
-      error: "לא נמצא טוקן, אנא התחבר למערכת",
-    });
+    // return res.status(401).json({
+    //   error: "לא נמצא טוקן, אנא התחבר למערכת",
+    // });
+
+    const error = new Error("לא נמצא טוקן, אנא התחבר למערכת");
+    error.status = 401;
+    return next(error);
   }
 
   try {
@@ -26,9 +30,9 @@ const verifyUser = (req, res, next) => {
     next();
   } catch (error) {
     // verify will throw error here if not works
-    return res.status(401).json({
-      error: "טוקן לא תקין - אנא התחבר מחדש",
-    });
+    error.status = 401; // Set appropriate status for JWT errors
+    error.message = "טוקן לא תקין - אנא התחבר מחדש";
+    next(error);
   }
 };
 
