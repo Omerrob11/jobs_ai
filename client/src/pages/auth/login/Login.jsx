@@ -1,6 +1,54 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { authService } from "../../../services/auth/authService";
 const Login = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [status, setStatus] = useState({
+    message: "",
+    isError: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Clear any existing status messages
+    setStatus({ message: "", isError: false });
+
+    try {
+      // Call the signup service
+      const response = await authService.login(formData);
+
+      // Show success message
+      setStatus({
+        message: "התחברת בהצלחה!",
+        isError: false,
+      });
+
+      // Reset form
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      // Show error message
+      setStatus({
+        message: error.message,
+        isError: true,
+      });
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
@@ -32,7 +80,7 @@ const Login = () => {
         </div>
 
         {/* Login Form */}
-        <form className="mt-8 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="space-y-4">
             {/* Username Field */}
             <div>
@@ -48,6 +96,8 @@ const Login = () => {
                   name="username"
                   type="text"
                   required
+                  value={formData.username}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -67,6 +117,8 @@ const Login = () => {
                   name="password"
                   type="password"
                   required
+                  value={formData.password}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
                 <button
@@ -90,6 +142,19 @@ const Login = () => {
               </div>
             </div>
           </div>
+
+          {/* Status Message */}
+          {status.message && (
+            <div
+              className={`p-4 rounded-md ${
+                status.isError
+                  ? "bg-red-50 text-red-700"
+                  : "bg-green-50 text-green-700"
+              }`}
+            >
+              {status.message}
+            </div>
+          )}
 
           {/* Submit Button */}
           <div>
