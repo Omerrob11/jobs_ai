@@ -153,3 +153,13 @@ Cors:
 Imagine your frontend (localhost:5173) and backend (localhost:3000) are like two different countries
 By default, browsers prevent a website from one "country" from making requests to another for security reasons
 CORS is like a passport system that tells the browser which cross-country requests are allowed
+
+
+Nodejs:
+Node process will exit automatically when it has nothing left to do
+But if there's an open connection (like a database pool), it stays alive
+
+Server : should always run
+- when you run node server.js, server allways runs, listen to http requests
+- the database pool is also always runs, ready for queries
+- pools are just the way to connect to the db

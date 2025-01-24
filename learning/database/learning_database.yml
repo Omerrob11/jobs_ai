@@ -55,7 +55,7 @@ Server:
 
 
 Enviorment:
-- we can save the aces into the enviorment to acess later.
+- we can save the acess into the enviorment to acess later.
 - we can save the password to the enviorment, in our case: DATABASE_PASSWORD
 
 
@@ -72,3 +72,47 @@ Models:
 superuser:
 - superuser is the role with full administrative priviliges:
   - can do anything to database, other roles, etc.
+
+
+
+Database storage:
+When you run PostgreSQL locally, the data is stored on your computer's hard drive
+The actual data is stored in binary files that PostgreSQL manages
+In Production:
+
+Could be on a dedicated database server
+Could be on a cloud service (like AWS RDS, Heroku Postgres)
+
+
+Database hirearchy:
+Blog Platform Example:
+
+One-to-Many Relationship: One user can have many jobs
+Foreign Keys: Jobs table will have a user_id that references the Users table
+Cascading: If you delete a user, you might want to delete all their jobs too
+
+Users
+└── Blog Posts (each user can have many posts)
+    └── Comments (each post can have many comments)
+        └── Replies (each comment can have many replies)
+    └── Categories (each post can belong to multiple categories)
+    └── Tags (each post can have multiple tags)
+
+This is achieved through foreign keys:
+- Each blog post has a user_id (pointing to its author)
+- Each comment has a post_id (pointing to its post)
+- Each reply has a comment_id (pointing to its parent comment)
+
+
+Pools:
+- we need to talk with the database
+- we need a connections to the database - pools, have a bunch of connetsions
+- we borrow a connection from the pool, now we can talk with the database, and run the query
+- than we return the connection to the pool
+
+pool has 5 connections ready
+for each request:
+   borrow connection from pool
+   run query
+   return connection to pool
+   
