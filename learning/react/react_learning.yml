@@ -1,0 +1,9 @@
+project structure:
+components/common: This is where you'll put reusable UI components that you'll use across multiple pages. For example, your login form's input fields and buttons could be reused in the signup form.
+components/layout: Components that form the structure of your pages, like headers and footers. These are different from common components because they're more specific to your application's layout.
+pages: Each major route in your application gets its own folder here. The auth folder contains Login and SignUp since they're related but separate pages.
+context: Since you're implementing authentication, you'll likely need an AuthContext to manage the user's authentication state across the application.
+services: This is where your API calls will live. It helps keep your data fetching logic separate from your components.
+
+each page its one folder:
+  - make it easier to add design for this specific page, etc

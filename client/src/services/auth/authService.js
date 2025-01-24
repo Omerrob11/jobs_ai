@@ -41,6 +41,10 @@ export const authService = {
           "Content-Type": "application/json", // No colon, and typically "Type" is capitalized
         },
         body: JSON.stringify(userData),
+        // we need the credentials - each route that sets or require coockis
+        // meaning, routes that need checks for cookies (that user loged in, private data)
+        // needs it
+        credentials: "include", // PLEASE send my id (cookies) with this request
       });
 
       // reads and parses the response body, which is in json format

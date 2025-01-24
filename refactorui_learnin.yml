@@ -1,0 +1,10 @@
+- Starting from scratch
+    - layouts:
+        - Establish a spacing and sizing systems
+        - Relative sizing doesn't scale
+        - avoid ambiguous spacing
+    - Designing Text:
+        - Establish a type scale
+        - Use good fonts (mainly just steal fonts)
+    - Working with color
+    - Working with images

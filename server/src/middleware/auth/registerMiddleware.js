@@ -61,6 +61,7 @@ const checkExistingUser = async (req, res, next) => {
       return res.status(400).json({ error: "אימייל כבר בשימוש" });
     }
     if (userNameExists.rows.length > 0) {
+      console.log("we return this thin");
       return res.status(400).json({ error: "שם משתמש כבר בשימוש" });
     }
 

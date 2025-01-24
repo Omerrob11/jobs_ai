@@ -145,3 +145,11 @@ app.use(cookieParser());
 First check if someone's trying to enter the secure area
 Then check if they're heading to the registration desk
 Finally, direct everyone else to the public areas
+
+
+
+
+Cors:
+Imagine your frontend (localhost:5173) and backend (localhost:3000) are like two different countries
+By default, browsers prevent a website from one "country" from making requests to another for security reasons
+CORS is like a passport system that tells the browser which cross-country requests are allowed

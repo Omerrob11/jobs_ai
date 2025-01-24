@@ -1,0 +1,93 @@
+Utility-First Paradigm
+
+Core Concepts:
+
+Utility class philosophy
+Naming conventions
+Component patterns
+Responsive design approach
+
+
+
+Essential Utilities:
+
+Layout Utilities:
+
+Container and spacing
+Flexbox utilities
+Grid system
+Position utilities
+
+
+
+Breakpoint System:
+
+Mobile-first approach
+Responsive prefixes
+Custom breakpoints
+Container queries
+
+
+State Variants:
+
+Hover states
+Focus states
+Active states
+Group states
+
+
+Shadcn:
+Core Components:
+Buttons & inputs
+Cards & containers
+Navigation components
+Modal systems
+
+
+framer motion:
+Animation fundamentals
+Transitions
+Gestures
+Variants
+
+advanced framer:
+Page transitions
+Scroll animations
+Layout animations
+Orchestration
+
+Projects:
+Navigation Systems:
+Responsive headers
+Mobile menus
+Dropdown navigation
+Mega menus
+
+Content Patterns:
+Hero sections
+Feature grids
+Pricing tables
+Testimonial carousels
+
+Landing page construction:
+Page Structure:
+
+Header composition
+Main content flow
+Footer systems
+Responsive behaviors
+
+
+Advanced Features:
+
+Dark mode
+Animation integration
+Performance optimization
+Loading states
+
+design systems:
+- what is a desin systems
+- material design vs apple high
+
+material is for google ecosystem application - you should us tailwind and shadcn
+recommended is tailwind css + shadcn ui

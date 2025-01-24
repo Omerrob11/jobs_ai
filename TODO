@@ -9,6 +9,9 @@
 // On form - need to sanitaize and validate:
 // anitization and validation out here
 
+// Implement CSRF protection
+// Add input sanitization
+
 /*
 
 Traditional Server-Side Rendering:

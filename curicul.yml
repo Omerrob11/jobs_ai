@@ -1,0 +1,107 @@
+HTML & CSS FUNDAMENTALS
+
+HTML:
+- rtl
+- responsive design
+- form validation
+
+CSS:
+Box Model (padding, margin, border)
+content box vs border box
+Block vs inline block vs flex
+width/height calculations 
+Position properties (relative, absolute, fixed)
+Units (rem, em, px, vh, vw)
+Z-index and stacking context
+
+Layout fundaentals:
+Flexbox fundamentals
+Grid basics
+Container and spacing patterns
+
+Tailwind css:
+Utility-first philosophy
+Naming convenstions
+component patterns
+Responsive design prefixes (sm:, md:, lg:)
+Spacing and sizing utilities (conatiner and spaciging)
+Flexbox utilities
+Grid utilities
+position utilities
+Colors and typography system
+State variants (hover:, focus:, active:)
+
+component thinking:
+- layout patterns (sidebars, cards, heroes)
+- responsive component pattern
+
+
+libraries:
+- framer motion
+- shadcn
+- headless ui
+- lucide icons
+
+
+Animation:
+CSS transitions
+Transform properties
+Keyframe animations basics
+
+Framer Motion fundamentals:
+
+Basic animations
+Gestures
+Scroll animations
+Page transitions
+
+UI theory:
+- typograhpy
+- color theory
+- modern design patterns
+- constrat
+- hierarchy
+- white space
+- color theory
+- typography
+
+Projects:
+- Simple components:
+  - buttons
+  - cards
+  - navigation bars
+  - heroes
+  - feature sections
+- complex components:
+  - multi - step forms
+  - dynamic navigation
+  - interactive pricing tables
+  - testemonial carousels
+  - faq accordins
+
+- landing pages sections:
+  - heroes sections
+  - features grid
+  - tetemonial carousels
+  - contact forms
+- complete landing pages:
+  - progresively complex pages
+  - focus on responsive design
+  - add animations and transitions
+  - landing pages, pricing pages, features pages, contact pages, etc
+
+
+  Learning approach:
+  - study one design pattern daily
+  - recreate one component daily
+  - build one full section every 3 days
+  - complete on full page weekly
+
+
+
+
+Resourcces:
+- buildui - for inspiration and tutorials
+- dribble for inspiratio
+- refero for component exampls
+- landbook for landing pages examples

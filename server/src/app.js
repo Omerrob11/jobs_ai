@@ -21,11 +21,18 @@ const appRouter = require("./routes/app/appRouter");
 // middleware for pasring json bodies
 // meaning, we get data, and for each requests, we get the data in json, and we convert it to javascript objects
 app.use(express.json()); // Middleware to parse JSON
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 // .use() -> adding middleware to express, where middleware does something to the request
 // before passing it along. .use() do something for every requests
 // enable cors for frontend communication, allows requests from our react app
-app.use(cors());
+app.use(
+  cors({
+    // accepting requets from the url
+    origin: FRONTEND_URL, // Who is allowed to make requests
+    credentials: true, // Are they allowed to send credentials
+  })
+);
 
 // parsing cookie hader rom incoming requests, pouplate req.cookies with object containg cookie value.
 // adding res.cookie() to respond with cookies

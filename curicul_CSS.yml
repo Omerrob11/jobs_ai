@@ -1,0 +1,91 @@
+Box Model (Most Critical):
+
+
+Content box vs border box
+How margin, padding, and border work together
+Understanding width/height calculations
+Why elements take certain spaces
+Box-sizing behavior
+
+
+Display Properties:
+
+Block vs Inline vs Inline-block
+Understanding why elements stack or flow  - Natural element flow
+How width and height affect each type
+Default behaviors of common elements
+
+Visual Hierarchy & Flow:
+
+Document Flow Basics
+
+Natural stacking
+Parent-child relationships
+Overflow behaviors
+Containing blocks
+
+Flexbox (Super Important):
+
+
+Main axis vs cross axis
+How flex-grow and flex-shrink work
+Why items align the way they do
+Space distribution concepts
+
+
+Position (Essential):
+
+
+Static vs Relative vs Absolute vs Fixed
+How positioning contexts work
+When to use each type
+Stacking context with z-index
+
+
+Units and Sizing:
+Relative units (rem, em) vs absolute (px)
+Viewport units (vh, vw)
+Percentage behaviors
+When to use each type
+
+
+Visual Hierarchy Concepts:
+How elements naturally stack
+Parent-child relationships
+Why overflow happens
+Containing blocks
+
+
+CRUCIAL CONCEPTS TO MASTER:
+
+Layout Flow:
+
+
+How elements naturally flow
+What causes line breaks
+When elements stack
+How floats affect layout
+
+
+Spacing Rules:
+
+Margin collapsing
+When padding is better than margin
+How white space works
+Auto margins behavior
+
+
+Containment:
+
+
+When height: 100% works
+Why overflow happens
+How to contain floated elements
+Clearing techniques
+
+
+Stacking:
+Natural document flow
+How z-index works
+Stacking contexts
+When elements overlap
