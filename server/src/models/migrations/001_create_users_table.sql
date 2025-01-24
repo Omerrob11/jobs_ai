@@ -9,8 +9,9 @@ CREATE TABLE users (
     username VARCHAR(50) UNIQUE NOT NULL,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    pdated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
 -- PRIMARY KEY -  unique identifier for the row.
+
