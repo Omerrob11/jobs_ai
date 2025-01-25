@@ -1,8 +1,0 @@
-module.exports = something
-
-where if we import something, we can make it in anyname we want, because we only export one thing from that file?
-
-module.exports ={something1,something2}
-
-where we export an object, and we need to deconstruct with the exact same name or rename it.
-

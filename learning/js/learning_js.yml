@@ -1,0 +1,36 @@
+module.exports = something
+
+where if we import something, we can make it in anyname we want, because we only export one thing from that file?
+
+module.exports ={something1,something2}
+
+where we export an object, and we need to deconstruct with the exact same name or rename it.
+
+Frontend Validation:
+At the front counter, servers quickly check orders before even sending them to the kitchen:
+
+"Sorry, you can't order zero items"
+"This dish requires you to choose a side"
+ In your job board, frontend validation gives users instant feedback like "Please fill in the company name"
+  without waiting for a server request.
+
+  Backend Validation:
+But why do we also need kitchen (backend) checks? Because someone could bypass the front counter entirely 
+Send requests directly to your API using tools like Postman
+Modify JavaScript in their browser
+Disable frontend validation
+
+
+Input Sanitization:
+Now imagine the kitchen receives an order for "🍕EXTRA large Pizza!!!!" with lots of special characters. Sanitization is like having a standard form where the kitchen staff rewrites this as "Extra Large Pizza" in a clean, consistent format. In programming, sanitization includes:
+
+Removing dangerous special characters that could harm your database,
+Converting data into consistent formats (like how we formatted dates)
+Trimming extra spaces
+
+
+Always:
+- make basic input validation in backend
+- use paramatized queries
+- trim whitespace
+- type matching: match the type they send you to what the database expect

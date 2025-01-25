@@ -1,3 +1,6 @@
+// objects are way to organize data
+// especaiilly, grouping related data
+// here, we have related data, so we put them in an ibhection
 const JOB_STATUS = {
   statusToDb: {
     "עבודות שנשמרו": "wishlist",
