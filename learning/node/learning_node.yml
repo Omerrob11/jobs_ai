@@ -163,3 +163,22 @@ Server : should always run
 - when you run node server.js, server allways runs, listen to http requests
 - the database pool is also always runs, ready for queries
 - pools are just the way to connect to the db
+
+Nodejs flow:
+
+
+The front counter (like your routes) - where customers place orders
+The waiters (like your middleware) - who check if customers have reservations, verify IDs for alcohol, etc.
+The kitchen (like your controllers) - where the actual cooking happens
+The storage room (like your models) - where ingredients are stored and managed
+
+buisness logic - the actual work of the application gets down
+models are handle database operation, but the controller is buisnesss logic
+the chefs that needs data, sends data back, etc
+
+the job of the middlware, is to do stuff before we pass it to the controller -
+before main jobs happen
+
+middlware action:
+- validation
+- data sanitization / formating

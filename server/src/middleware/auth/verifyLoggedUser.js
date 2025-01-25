@@ -10,7 +10,8 @@ const verifyUserJwtToken = (req, res, next) => {
 
   console.log("inside verify");
   if (!token) {
-    // maybe here redirect to log in page
+    // maybe here redirect to log in page if its a page request - we want to recieve html in page requests
+    // or a message "please logged in again" if its api request -we  want to recieve data in api request
     // return res.status(401).json({
     //   error: "לא נמצא טוקן, אנא התחבר למערכת",
     // });

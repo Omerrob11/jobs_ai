@@ -7,3 +7,24 @@ services: This is where your API calls will live. It helps keep your data fetchi
 
 each page its one folder:
   - make it easier to add design for this specific page, etc
+
+
+
+Traditional Server-Side Rendering:
+
+javascriptCopy// Express renders templates
+app.get("/sign-up", (req, res) => res.render("sign-up-form"));
+
+
+
+React (Single Page Application):
+
+javascriptCopy// Frontend (React handles routing and rendering)
+<Route path="/sign-up">
+    <SignUpForm />
+</Route>
+
+// Backend (Express just handles API endpoints)
+app.post("/api/auth/register", validateInput, checkExistingUser, ...);
+
+

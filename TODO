@@ -11,24 +11,8 @@
 
 // Implement CSRF protection
 // Add input sanitization
+// implement input validation
+// sql query optimization
+// transation handling for operation that might need it
 
-/*
-
-Traditional Server-Side Rendering:
-
-javascriptCopy// Express renders templates
-app.get("/sign-up", (req, res) => res.render("sign-up-form"));
-
-
-
-React (Single Page Application):
-
-javascriptCopy// Frontend (React handles routing and rendering)
-<Route path="/sign-up">
-    <SignUpForm />
-</Route>
-
-// Backend (Express just handles API endpoints)
-app.post("/api/auth/register", validateInput, checkExistingUser, ...);
-
-*/
+// tho- no need for perfect
