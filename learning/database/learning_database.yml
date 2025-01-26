@@ -116,3 +116,10 @@ for each request:
    run query
    return connection to pool
    
+
+   Database errrors:
+   Connection issues - the database might be down or unreachable
+Constraint violations - like if we try to violate a foreign key constraint
+Data type mismatches - if we try to insert invalid data types
+Network timeouts
+These errors happen at the PostgreSQL level, and Node's pg library automatically converts them into JavaScript errors that bubble up through our async/await chain.

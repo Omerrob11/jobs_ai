@@ -1,5 +1,9 @@
 const pool = require("./database");
 
+// unaothirized users can't acess it, because the endpiont
+///app/jobs is block by the jwt - if they are un aothizred
+// we will return a response that they are not autorized
+// and we will not continue with the requestss
 const createJob = async (
   userId,
   companyName,
@@ -17,12 +21,21 @@ const createJob = async (
       [userId, companyName, position, status, applicationDate, notes]
     );
 
+    // we get back an object, that contain some informatio, for example, the command
+    // we also get rows - the actual rows we inserted to the data
+    // because we insert only one row here, we only care about the row we inserted
+    // its in the rows[0]
+    // and it will be an object containg the row you just entered, with all the row proerites from the db:
+    // {id:1, user_id:123, company_name: google, etc...}
     return jobResult.rows[0];
   } catch (error) {
     // Log the error for debugging
     console.error("Error creating job:", error);
 
     // Re-throw the error so the controller can handle it appropriately
+    // we can have connection error, constratin vilations, data type error
     throw error;
   }
 };
+
+module.exports = { createJob };

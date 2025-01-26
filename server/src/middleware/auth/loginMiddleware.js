@@ -47,7 +47,7 @@ const verifyUser = async (req, res, next) => {
 
     // {id:1, username:"john_Dow", ...} - all the filed we get from the database
 
-    // saving the user information in the req object
+    // saving the user information from the db in the req object
     req.user = userName.rows[0];
 
     next();
@@ -62,6 +62,8 @@ const generateToken = async (req, res, next) => {
   const userId = req.user.id;
 
   // data stored in the token
+  // this is actually the data of the user, we store in the token
+  // we then decode it in the verifyUserToken middleware, and see if its the same
   const payload = {
     userId: userId,
   };

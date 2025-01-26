@@ -22,9 +22,15 @@ const verifyUserJwtToken = (req, res, next) => {
   }
 
   try {
+    // we already have the user id.
+    // we will get here only after the user is loged in,
+    // meaning - he will have a cookie and make requests only if he logged in
+    // so we don't need the password again, this is a mechanisem to not need the password
+    // we get the userid from the token
     // i think here we could also have a function
     // like a callabck function
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // decoded contain the payload: {userId:123} - the data we orignaly sotre in it
 
     // attach username so we won't need to check again
     // it will be avilable for next middleware or routes

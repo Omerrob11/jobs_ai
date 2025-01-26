@@ -1,0 +1,17 @@
+This is a fundamental security pattern in web development: - 
+never trust data that comes directly from the client (like request body)
+, but trust data that's been verified through our security processes 
+(like JWT verification).
+
+JWT_SECRET:
+- a recpeice to create a special signuatre
+- when create a token, we combine the payload with the secret
+- than for each token, we create a unique signuatre
+- you can recreate that signuatre only with that exact secret - so we hide it in .env
+- jwtverify : check the signuatre created with our secret, and if it is expires
+- throws an error if not
+
+token:
+- payload + signature that created with our secret
+- they can't create our signuatr without the secret
+- so if the payload is forget, signautre will not match without the secret

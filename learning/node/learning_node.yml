@@ -10,13 +10,20 @@ MVC: Model View Controller
     - get the data from "models", sends it to views to show the data
   - send response back to clients
   - coordinate between view and models
-
+  ::::  Controllers are responsible for sendings the response!!! :::::
+  :::: so you can defenintly send error responses there instaed of passing control to error middleware :::
 - View:
   - Present the data to the customers
     - handles the presentation layer, determine how the data is displayed to users
     - usually template engines like ejs
   - backthen we use html templates rendered on the server
   - server actually handle the presentation.
+
+middlware:
+- middleware error is for unexpected errors / middleware errors only
+- when you want a cover if something is happend
+- for errores in the controllers, its more specific
+- middlware is a sfatey net for unexpected case
 
 - Routes:
   - Define api endpoints
