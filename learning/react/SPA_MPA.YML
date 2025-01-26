@@ -1,0 +1,56 @@
+Before React and SPAs (Single Page Applications), web development worked quite differently. Imagine each webpage as a complete document that lives on the server. When you clicked a link, your browser would request a new HTML document from the server, and the server would send back the entire page. It's like reading a book where every time you want to turn the page, you have to ask someone to bring you a whole new book with just that page you want to read.
+For example, if you had a website with Home, About, and Contact pages, each of these would be a separate HTML file on the server. When a user clicked "About", the server would process the request, maybe pull some data from a database, create a new HTML document, and send the whole thing back. This approach is called "Multi-Page Application" (MPA). Every page transition meant a complete page reload - you'd often see the browser flash white as it loaded the new page.
+Now, Single Page Applications (SPAs) work very differently. Think of an SPA like a sophisticated piece of software that gets downloaded once when you first visit the website. Instead of requesting new HTML documents for each page, the application already has all the code it needs to show different views. When you click around, instead of asking the server for new pages, the JavaScript (React in our case) just swaps out the content right there in the browser. It's more like having a book where all the pages are already there, and you're just flipping between them.
+The only time an SPA typically talks to the server is to get or send data (through APIs), not to get new pages. This is why your React application feels so smooth - there's no page reloading, just instant transitions between views.
+This architectural shift has several implications:
+
+Better user experience (faster, smoother transitions)
+Less server load (server just provides data, not entire pages)
+More complex initial load (have to download the whole application at first)
+Different approach to things like routing (handled in the browser instead of the server)
+
+Would you like me to elaborate on any of these aspects? Or shall we explore how this architectural difference affects how we handle things like 404 errors? CopyRetryClaude can make mistakes. Please double-check responses.
+
+
+spa:
+- no page reload when fetching data
+
+api:
+- its the endpoints that handle requests and send responses
+- but its more of a contract - how the frontend and the backend talk with each other
+- we have api endpoints, each have a specific type of request
+- /auth/login endpoints is a authentication
+- /app/jobs endpoints manage job application
+the idae of api, is how the frontend communicate with the backend
+and its done with the endpoints
+so if you want to comunicate to get the jobs, you will talk with the api
+you will ask the api endpoints to get the jobs
+and he will direct it to the correct handler
+
+MPA:
+In an MPA, when a user requests a page, the server does all the work of preparing that page before sending it to the browser. Think of it like ordering a meal at a restaurant - the kitchen (server) prepares the complete dish before sending it to your table. This is where template engines come in.
+A template engine is like a document with placeholders that the server fills in with real data. For example, if you're using a template engine like EJS (Embedded JavaScript) or Handlebars, your template might look something like this:
+
+When a request comes in, the server:
+
+Fetches the needed data from the database
+Plugs that data into the template
+Processes the template to generate a complete HTML page
+Sends the finished HTML to the browser
+
+
+SSR:
+Imagine you're visiting a website. In a traditional SPA (Single Page Application), when you first load the page, you get an almost empty HTML file with a bunch of JavaScript that needs to run before you see any content. It's like getting an empty picture frame first, and then the JavaScript has to paint the picture after it loads. This can make the initial page load feel slow, and search engines might have trouble seeing your content.
+SSR solves this problem by having the server do the initial rendering work. When you request a page, the server runs all the necessary code (including your React components) and sends back a complete HTML page with all the content already in place. It's like getting a fully painted picture right away. Then, once the page loads, React takes over in the browser (this is called "hydration") and makes everything interactive.
+Let's break down what happens in SSR:
+
+User requests a page
+Server runs your React code
+Server generates complete HTML with all your content
+Server sends this HTML to the browser
+Browser shows the content immediately
+JavaScript loads in the background
+React "hydrates" the page, making it interactive
+
+
+without ssr:

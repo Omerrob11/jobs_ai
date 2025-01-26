@@ -36,7 +36,7 @@ const postJob = async (req, res, next) => {
     });
     // add it to the db, inside the models
   } catch (error) {
-    console.error("failed in adding new job:", error);
+    console.error("failed in adding  new job:", error);
 
     res.status(500).json({
       message: "שגיאה בהוספת עבודה חדשה",

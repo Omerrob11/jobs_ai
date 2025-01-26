@@ -1,0 +1,33 @@
+No route handler:
+  - express will send back a html error page
+  - the response will be 404 status code (not found)
+First, Express looks through all your defined routes in the order they were registered in app.js. In your application, it checks:
+
+Does it match /auth/*? No
+Does it match /app/*? No
+Does it match your public routes? No
+
+
+When Express can't find any matching route, it automatically responds with that HTML 404 page you saw earlier. This is Express's built-in 404 handler.
+
+in real application: not found:
+- you will add your own catch-all route at the end, but before error handler middleware
+ like this
+app.use((req, res) => {
+  res.status(404).json({ message: "הדף המבוקש לא נמצא" );
+Let React Router handle 404s for frontend routes (like /dashboard/nonexistent)
+Let your Express API handle 404s for API routes (like /api/nonexistent)
+Configure your server to redirect all unmatched non-API routes to your React application
+// API routes first
+app.use('/api', apiRoutes);
+
+// Then serve React app for all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+<Routes>
+  <Route path="/dashboard" element={<Dashboard />} />
+  <Route path="/jobs" element={<Jobs />} />
+  {/* This catches any unmatched routes */}
+  <Route path="*" element={<NotFound />} />
+</Routes>

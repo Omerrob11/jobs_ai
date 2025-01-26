@@ -44,7 +44,7 @@ my understanding:
 - each website has cookiets related to it
 
 why cookies:
-
+- the browser automatically handles the cookie storage.
 - cookies are storage mechanisem in the broswer , instead of localStorage
   instead of:
   // Frontend would need to manually store data

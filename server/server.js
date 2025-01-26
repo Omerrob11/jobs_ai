@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
+  console.log("Try accessing http://localhost:" + PORT);
 });
 
 // callback - what to do later on, a function we pass ass paramater

@@ -1,4 +1,4 @@
-const JOB_STATUS = require("../../config/constants");
+const { JOB_STATUS } = require("../../config/constants");
 const validateJobEntry = async (req, res, next) => {
   const { companyName, position, status, applicationDate, notes } = req.body;
   // never trust client side data - it is not good, ever
