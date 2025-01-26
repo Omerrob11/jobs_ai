@@ -54,17 +54,17 @@ const getAllJobs = async (userId) => {
   }
 };
 
-const getJobsById = async (jobId, userId) => {
+const getJobById = async (jobId, userId) => {
   try {
     const jobQueryResult = await pool.query(
       "SELECT * FROM jobs WHERE id=$1 AND user_id = $2",
       [jobId, userId]
     );
 
-    return jobQueryResult.rows[0];
+    return jobQueryResult.rows[0]; //return undefined if not job found
   } catch (error) {
     throw error;
   }
 };
 
-module.exports = { createJob, getAllJobs, getJobsById };
+module.exports = { createJob, getAllJobs, getJobById };

@@ -1,6 +1,6 @@
 // handle buisness logic
 
-const { createJob, getAllJobs, getJobsById } = require("../models/jobsModel");
+const { createJob, getAllJobs, getJobById } = require("../models/jobsModel");
 
 // controllers should have http verb based names - pust,get,put
 // models should be action names, createjob, findjob, etc - they describe the db opertion
@@ -75,7 +75,18 @@ const getJobsList = async (req, res, next) => {
 };
 
 const getJob = async (req, res, next) => {
+  const jobId = req.params.id; // we get it from route paramaters
   const userId = req.user.userId;
+
+  try {
+    const job = await getJobById(jobId, userId);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "שגיאה בטעינת המשרה",
+      error: error.message,
+    });
+  }
 };
 
-module.exports = { postJob, getJobsList };
+module.exports = { postJob, getJobsList, getJob };

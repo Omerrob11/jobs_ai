@@ -1,0 +1,16 @@
+Route paramaters:
+app.get('/jobs/:id')// 
+URL would be /jobs/123
+
+Semantics and REST conventions: Route parameters are used when the p
+parameter is part of the resource's identity. A job with ID 123 is a distinct resource, 
+so it makes sense to have it as part of the URL path
+ Think of it like a file system - 
+ each job is like a unique file with its own path.
+
+ Query parameters, on the other hand, are better suited for:
+
+Optional parameters
+Filtering and searching (like /jobs?status=applied)
+Pagination (like /jobs?page=2&limit=10)
+Sorting (like /jobs?sort=date)
