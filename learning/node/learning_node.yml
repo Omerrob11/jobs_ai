@@ -186,6 +186,6 @@ the chefs that needs data, sends data back, etc
 the job of the middlware, is to do stuff before we pass it to the controller -
 before main jobs happen
 
-middlware action:
+middlware usage mainly for:
 - validation
 - data sanitization / formating
