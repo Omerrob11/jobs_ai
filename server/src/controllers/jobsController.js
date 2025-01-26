@@ -78,8 +78,35 @@ const getJob = async (req, res, next) => {
   const jobId = req.params.id; // we get it from route paramaters
   const userId = req.user.userId;
 
+  // usualy users interact with the interact
+  // but we need to check if maybe someone try to pase the url
+  if (isNaN(jobId)) {
+    return res.status(400).json({
+      success: false,
+      message: "מזהה משרה לא תקין", // Invalid job ID
+      error: "Job ID must be a number",
+    });
+  }
+
   try {
     const job = await getJobById(jobId, userId);
+
+    // if job is not found
+    if (!job) {
+      return res.status(404).json({
+        success: false,
+        message: "משרה לא נמצאה", // Job not found
+        data: { jobId },
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "המשרה נמצאה בהצלחה",
+      data: {
+        job: job,
+      },
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
