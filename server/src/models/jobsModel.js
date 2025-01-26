@@ -38,4 +38,20 @@ const createJob = async (
   }
 };
 
-module.exports = { createJob };
+const getAllJobs = async (userId) => {
+  try {
+    const allJobsQueryResult = await pool.query(
+      "SELECT * FROM jobs WHERE user_id =$1 ORDER BY created_at DESC",
+      [userId]
+    );
+
+    // returning all jobs, not just the first
+    // the rows are actually the data base rows
+    return allJobsQueryResult.rows;
+  } catch (error) {
+    // throw error to the calling code
+    throw error;
+  }
+};
+
+module.exports = { createJob, getAllJobs };

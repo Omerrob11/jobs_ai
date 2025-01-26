@@ -1,6 +1,6 @@
 // TODO:
 // set up authentication routs
-//  configure database connecection
+// configure database connecection
 
 // create registiration route
 // hash the password (bcrypt for hashing)
@@ -19,6 +19,7 @@
 
 // todo:
 // finish db operation for kanaban
+// go over how a database response look like, a req/res object, and the cookies
 // create the frontend for the kanban
 // connect front to back
 // create the logout endpoint

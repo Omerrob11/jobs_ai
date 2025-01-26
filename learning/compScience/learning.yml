@@ -1,0 +1,3 @@
+Seperation of concerns:
+  - if you have a function -it should only do one thing
+  - it should not do anything else
