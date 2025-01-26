@@ -23,6 +23,7 @@
 // create the frontend for the kanban
 // connect front to back
 // create the logout endpoint
+// add pagination for getting all jobs
 // deploy your application - you must be able to deploy fast as possible
 // so you would understand the whole process
 // then repeat the process in the next 1 month, 2-3 times creating solid front and back and application

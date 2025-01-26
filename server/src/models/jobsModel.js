@@ -54,4 +54,6 @@ const getAllJobs = async (userId) => {
   }
 };
 
-module.exports = { createJob, getAllJobs };
+const getJobsById = async (userId) => {};
+
+module.exports = { createJob, getAllJobs, getJobsById };
