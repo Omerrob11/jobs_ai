@@ -2,6 +2,11 @@ Route paramaters:
 app.get('/jobs/:id')// 
 URL would be /jobs/123
 
+
+// you can match any value, and save it with the variable id
+// can acess in req.params.id
+// meaning- we just save what he added to us in the paramater
+
 Semantics and REST conventions: Route parameters are used when the p
 parameter is part of the resource's identity. A job with ID 123 is a distinct resource, 
 so it makes sense to have it as part of the URL path
@@ -14,3 +19,101 @@ Optional parameters
 Filtering and searching (like /jobs?status=applied)
 Pagination (like /jobs?page=2&limit=10)
 Sorting (like /jobs?sort=date)
+
+
+express routing:
+- it goes top to bottom, and stop at the first rule (route) that match
+- so you need to be more specific at the beginning\
+
+without paramater - the route can only match this url, and must match it specifcily
+its exact match if not paramater /query!!!:!!!!:
+When a request comes in, Express looks at each route pattern and tries to match it against the URL. The key is understanding what each pattern can match:
+"/" is very specific - it can ONLY match a URL that has nothing after the base path. It's like a rule that says "this must end exactly here, with nothing else."
+"/:id" is more flexible - it can match ANY single segment in that position. The :id tells Express "match anything here and save it as a parameter named 'id'". It's like a wildcard that can match any value.
+
+jobsRouter.get("/:id", getJob);     // Route A
+jobsRouter.get("/", getJobsList);    // Route B
+
+// Let's see what happens with different URLs:
+"/jobs"         → Matches Route A (/:id matches empty string)
+"/jobs/"        → Matches Route A (/:id matches empty string)
+"/jobs/123"     → Matches Route A (/:id matches "123")
+
+
+jobsRouter.get("/", getJobsList);    // Route A
+jobsRouter.get("/:id", getJob);      // Route B
+
+// Now let's see what happens:
+"/jobs"         → Matches Route A (exact match!)
+"/jobs/"        → Matches Route A (exact match!)
+"/jobs/123"     → Matches Route B (/:id matches "123")
+
+so to summary:
+- exact match should be first (more specific, needs exact match)
+- paramaters/queries should be second (more flexibel, can be a bucnh of routes - jobs/123, job/456 both match)
+
+with exact match only, the order does not matter!!!!
+each path can only match exactly what it specific
+
+When Express receives a request, it compares the URL against 
+each route pattern exactly
+
+empty url paramaters:
+oute parameters (like ":id") must match a segment of the URL path -
+ that is, something that comes between slashes
+ The query string (everything after the "?") 
+ is not considered part of the path and is handled separately.
+
+ app.get("/jobs/:id", getJob);        // Route A
+app.get("/jobs", getJobsWithQuery);  // Route B
+
+// Let's analyze the URL: "/jobs?status=applied"
+// Express first looks at just the path part: "/jobs"
+// It ignores everything after the "?" when matching routes
+
+Path part: "/jobs"
+Query part: "status=applied"
+
+
+
+
+query and url paramaters in routes:
+The query parameters don't affect route matching at all - they're like optional extras that get processed 
+after Express has already decided which route handler to use. 
+
+
+/jobs/123?status=applied&sortBy=date
+
+/jobs/123 is the path (where 123 is a URL parameter)
+status=applied&sortBy=date are the query parameters
+
+Express processes these in a specific order:
+
+First, it matches the base path and URL parameters
+Only after finding the right route, it processes any query parameters
+
+
+
+Let me explain the difference between these three URL patterns:
+
+"/jobs"
+"/jobs/"
+"/jobs/:id"
+
+In Express, by default, trailing slashes matter. This means:
+
+A request to "/jobs" matches only the exact "/jobs" route
+A request to "/jobs/" matches only the exact "/jobs/" route
+A request to "/jobs/anything" (including numbers) matches the "/jobs/:id" route
+
+I made a mistake earlier when I suggested that "/jobs/" would match the ":id" route. It doesn't - a route parameter needs actual content between the slashes to match
+
+
+app.get("/jobs/:id", getJob);
+app.get("/jobs", getJobsList);
+
+// Here's how different URLs would match:
+"/jobs"           → matches getJobsList
+"/jobs/"          → doesn't match either route by default
+"/jobs/123"       → matches getJob (id = "123")
+"/jobs/anything"  → matches getJob (id = "anything")

@@ -1,0 +1,23 @@
+The endpoint will be /app/jobs/:id. When a user wants to update
+ job with ID 123, 
+they'll send a PATCH request to /app/jobs/123
+
+Convention:
+The URL should identify the !!!! resource !!!!(the job), not the action (updating)
+The HTTP method (PATCH) already tells us we're updating
+
+GET    /app/jobs      -> Get all jobs
+GET    /app/jobs/123  -> Get job with ID 123
+POST   /app/jobs      -> Create a new job
+PATCH  /app/jobs/123  -> Update job with ID 123
+DELETE /app/jobs/123  -> Delete job with ID 123
+
+Knowledge:
+- you can create any route you want:
+  - app.get("/anyhtingiwant/:id")
+  - its better to follow the standarts
+
+
+
+req object:
+- req.body- where we have parsed json/form data from the request.
