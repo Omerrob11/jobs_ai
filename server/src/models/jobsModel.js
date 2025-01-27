@@ -98,4 +98,18 @@ const updateJob = async (jobId, userId, updates) => {
   }
 };
 
+const deleteJob = async (jobId, userId) => {
+  try {
+    const deletedJob = await pool.query(
+      "DELETE FROM jobs WHERE id = $1 AND user_id = $2 RETURNING *",
+      [jobId, userId]
+    );
+
+    return deletedJob.rows[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAllJobs = async (userId) => {};
 module.exports = { createJob, getAllJobs, getJobById, updateJob };

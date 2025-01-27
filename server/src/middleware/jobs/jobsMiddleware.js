@@ -1,4 +1,6 @@
 const { JOB_STATUS } = require("../../config/constants");
+// notice, we mainly need middleware for changing the database
+// not delete/get, for input new data, we need to validate the data
 const validateJobEntry = async (req, res, next) => {
   const { companyName, position, status, applicationDate, notes } = req.body;
   // never trust client side data - it is not good, ever
