@@ -36,3 +36,8 @@
 // in the evening, working on your job -creating content and company webistes
 // look on other ways to use middlewares in express - and how others us it
 // go over on object methods, etc
+// TODO: check if a controller should return error, or pass it to the error midddleware
+// TODO: Invent a characther:
+// who is milo?
+// what is his characteristics? does he full of confidence?
+// can you play him?

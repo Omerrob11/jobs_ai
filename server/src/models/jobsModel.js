@@ -67,4 +67,35 @@ const getJobById = async (jobId, userId) => {
   }
 };
 
-module.exports = { createJob, getAllJobs, getJobById };
+const updateJob = async (jobId, userId, updates) => {
+  // function to update job from the db.
+  try {
+    // the actual fileds it self
+    const fields = Object.keys(updates);
+    // values of the object diles
+    const values = Object.values(updates);
+    // how ever how many proeptries in updates object,
+    // put job id, and user id, right after them with the correct paramatized
+    const query = `UPDATE jobs SET ${fields
+      .map((field, index) => `${field} = $${index + 1}`)
+      .join(", ")} WHERE id = $${fields.length + 1} AND user_id = $${
+      fields.length + 2
+    } RETURNING *`;
+
+    // getting the value from the query
+    const updateJobQueryResult = await pool.query(query, [
+      ...values,
+      jobId,
+      userId,
+    ]);
+
+    // rows === array of objects that are the actual rows
+    // giving us the a row with the columns of the db
+    // and the data we just got from each row
+    return updateJobQueryResult.rows[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createJob, getAllJobs, getJobById, updateJob };

@@ -15,3 +15,21 @@ token:
 - payload + signature that created with our secret
 - they can't create our signuatr without the secret
 - so if the payload is forget, signautre will not match without the secret
+
+
+SQL Injection: We don't need to check for this because:
+
+We're using parameterized queries ($1, $2, etc.)
+PostgreSQL handles this security layer
+
+
+XSS (Cross-Site Scripting): We don't need heavy validation because:
+
+Frontend should sanitize HTML/JavaScript when displaying content
+Our notes are private to each user, not shared between users
+
+
+Resource Attacks:
+
+Length check prevents database storage issues
+Length check prevents memory issues when processing large strings

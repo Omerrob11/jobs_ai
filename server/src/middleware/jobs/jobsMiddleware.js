@@ -56,7 +56,7 @@ const validateJobUpdate = async (req, res, next) => {
   // position
   // status
   // updated_at
-  const { companyName, position, status, updatedAt } = req.body;
+  const { companyName, position, status, updatedAt, notes } = req.body;
 
   const updates = {};
 
@@ -96,10 +96,29 @@ const validateJobUpdate = async (req, res, next) => {
     updates.updatedAt = formattedDate;
   }
 
+  // defensive api - we can acess it through postman, curl commands, etc
+  // bugs: if frontend send bugs
+  // security
   if (Object.keys(updates).length === 0) {
     const error = new Error("לא נשלחו שדות לעדכון");
     error.status = 400;
     return next(error);
+  }
+
+  // we only check for length and stuff.
+  // the only thing that request can have
+  // is to damage your db or something, but we got this in sql injection
+  if (notes) {
+    // Trim whitespace
+    const trimmedNotes = notes.trim();
+
+    // Check length (for example, max 1000 characters)
+    if (trimmedNotes.length > 1000) {
+      const error = new Error("הערות לא יכולות להיות ארוכות מ-1000 תווים");
+      error.status = 400;
+      return next(error);
+    }
+    updates.notes = trimmedNotes;
   }
   // create another property in the req object
   // seperate raw data from updated data

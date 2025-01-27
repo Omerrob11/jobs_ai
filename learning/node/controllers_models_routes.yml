@@ -1,0 +1,10 @@
+controllers:
+-// controller should talk with the db
+// than, send a response
+
+
+How to start: bottom-up approach:
+- start with models
+- go to controllers
+- than go to middlewars
+- than go to routes

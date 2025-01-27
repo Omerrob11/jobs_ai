@@ -7,3 +7,33 @@ This is PostgreSQL's way of using parameterized queries.
 Instead of directly putting values in the query (which could lead to SQL injection), we use placeholders:
 $1 means "first parameter"
 $2 would mean "second parameter"
+
+// Query:
+"UPDATE jobs SET companyName = $1, status = $2 WHERE id = $3 AND user_id = $4"
+
+// Values array:
+["Google", "applied", 123, 456]
+
+// PostgreSQL matches them up:
+$1 -> "Google"     // First element in array
+$2 -> "applied"    // Second element
+$3 -> 123          // Third element
+$4 -> 456          // Fourth element
+
+
+the goal is to prevent sql injection:
+const companyName = "'; DROP TABLE jobs; --";
+
+const query = `UPDATE jobs SET company_name = '${companyName}'`;
+UPDATE jobs SET company_name = ''; DROP TABLE jobs; --'
+which dropped your table
+
+The paramateized just tell it this is data, not code
+
+Separates the SQL structure from the data:
+Looks at $1 and knows "this is a placeholder, not actual SQL code"
+Takes the corresponding value ("Google") and:
+
+Escapes special characters
+Adds proper quotes if needed
+Ensures it's treated as data, not code

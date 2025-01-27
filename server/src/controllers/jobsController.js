@@ -1,6 +1,11 @@
 // handle buisness logic
 
-const { createJob, getAllJobs, getJobById } = require("../models/jobsModel");
+const {
+  createJob,
+  getAllJobs,
+  getJobById,
+  updateJob,
+} = require("../models/jobsModel");
 
 // controllers should have http verb based names - pust,get,put
 // models should be action names, createjob, findjob, etc - they describe the db opertion
@@ -75,7 +80,7 @@ const getJobsList = async (req, res, next) => {
 };
 
 const getJob = async (req, res, next) => {
-  const jobId = req.params.id; // we get it from route paramaters
+  const jobId = +req.params.id; // we get it from route paramaters
   const userId = req.user.userId;
 
   // usualy users interact with the interact
@@ -116,4 +121,56 @@ const getJob = async (req, res, next) => {
   }
 };
 
-module.exports = { postJob, getJobsList, getJob };
+// controller should talk with the db, and update the job
+// than, send a response
+const patchJob = async (req, res, next) => {
+  // get jobId somehow - see how you did it earlier
+  // get userId
+
+  // why put id, and not job Id in the /:id thing?
+  const jobId = +req.params.id;
+  const userId = req.user.userId;
+  const updates = req.updates;
+
+  if (isNaN(jobId)) {
+    return res.status(400).json({
+      success: false,
+      message: "מזהה משרה לא תקין", // Invalid job ID
+      error: "Job ID must be a number",
+    });
+  }
+
+  try {
+    const updatedJob = await updateJob(jobId, userId, updates);
+    // check something here
+
+    // will happend if jobId doesnt exist, job belong to a differet user
+    // we will get undefined from it
+    if (!updatedJob) {
+      return res.status(404).json({
+        // we defend against the unlikely case that jobId is not existed
+        success: false,
+        message: "משרה לא נמצאה או שאין לך הרשאה לערוך אותה",
+        data: { jobId },
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "המשרה עודכנה בהצלחה",
+      data: {
+        job: updatedJob,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "שגיאה בעדכון המשרה",
+      error: error.message,
+    });
+  }
+
+  // what validation we need here?
+  // what if the query didn't find anything for example?
+};
+module.exports = { postJob, getJobsList, getJob, patchJob };
