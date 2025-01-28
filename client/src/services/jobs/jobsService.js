@@ -2,6 +2,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const jobService = {
   async addJobToDb(jobData) {
+    console.log(jobData);
     try {
       const response = await fetch(`${API_URL}/app/jobs`, {
         method: "POST",
@@ -22,6 +23,7 @@ export const jobService = {
       });
 
       const data = await response.json();
+      console.log("Server response:", data);
 
       if (!response.ok) {
         throw new Error(data.error || "משהו השתבש בתהליך הוספת משרה");

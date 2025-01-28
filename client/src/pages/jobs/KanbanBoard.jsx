@@ -5,34 +5,42 @@ import JobCard from "../../components/jobs/JobCard";
 import AddJobForm from "../../components/jobs/JobModal";
 import { jobService } from "../../services/jobs/jobsService";
 
-// did not found any token
-// we need to login first
-// than we need to connect it so we acutally send the token
-// so make sure you send the token in your reqest some how
-// because we didnt send it!
+// on page load, fetch all jobs from db
 const KanbanBoard = () => {
   const [isAddingJob, setIsAddingJob] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
 
   const columns = ["הצעה", "ראיונות", "עבודות שנשמרו", "הוגשו"];
+  const columnsToEnglish = {
+    הצעה: "offer",
+    ראיונות: "interviewing",
+    "עבודות שנשמרו": "wishlist",
+    הוגשו: "applied",
+  };
 
   const handleAddJob = async (jobData) => {
     try {
       const response = await jobService.addJobToDb(jobData);
       // If successful, add to jobs state
 
-      setJobs((prevJobs) => [...prevJobs, response.data.job]);
+      console.log(response.message);
+      setJobs((prevJobs) => [...prevJobs, response.job]);
+      console.log("Current jobs after adding:", jobs);
+
       setIsAddingJob(false);
       setError("");
     } catch (error) {
+      setIsAddingJob(false);
       setError(error.message || "אירעה שגיאה בהוספת המשרה");
     }
   };
 
   // Get jobs for a specific column
   const getColumnJobs = (column) => {
-    return jobs.filter((job) => job.status === column);
+    console.log("Filtering for column:", column);
+    console.log("Looking for status:", columnsToEnglish[column]);
+    return jobs.filter((job) => job.status === columnsToEnglish[column]);
   };
 
   return (
@@ -68,7 +76,7 @@ const KanbanBoard = () => {
                   <JobCard
                     key={job.id}
                     title={job.position}
-                    company={job.company_name}
+                    company={job.companyName}
                     daysAgo={3} // You might want to calculate this from job.created_at
                   />
                 ))}

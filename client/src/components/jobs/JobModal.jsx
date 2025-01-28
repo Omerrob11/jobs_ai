@@ -4,7 +4,7 @@ const AddJobForm = ({ onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
     companyName: "",
     position: "",
-    status: "נשמר",
+    status: "הוגשו",
     applicationDate: "",
     notes: "",
   });
@@ -49,7 +49,13 @@ const AddJobForm = ({ onSubmit, onClose }) => {
     e.preventDefault();
 
     if (validateForm()) {
-      onSubmit(formData);
+      const formattedData = {
+        ...formData,
+        applicationDate: formData.applicationDate
+          ? formData.applicationDate.split("-").reverse().join("/")
+          : "",
+      };
+      onSubmit(formattedData);
     }
   };
 
@@ -102,10 +108,10 @@ const AddJobForm = ({ onSubmit, onClose }) => {
               onChange={handleChange}
               className="w-full p-2 border rounded-lg"
             >
-              <option value="נשמר">נשמר</option>
-              <option value="הוגש">הוגש</option>
-              <option value="בראיונות">בראיונות</option>
+              <option value="הוגשו">הוגשו</option>
+              <option value="ראיונות">ראיונות</option>
               <option value="הצעה">הצעה</option>
+              <option value="עבודות שנשמרו">עבודות שנשמרו</option>
             </select>
           </div>
 

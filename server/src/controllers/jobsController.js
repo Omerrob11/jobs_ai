@@ -41,6 +41,8 @@ const postJob = async (req, res, next) => {
         notes: newJob.notes,
       },
     });
+    console.log("here we good?");
+
     // add it to the db, inside the models
   } catch (error) {
     console.error("failed in adding  new job:", error);

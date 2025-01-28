@@ -39,10 +39,12 @@
 // TODO: check if a controller should return error, or pass it to the error midddleware
 //TODO: add some functionallity to use with query paramaters - understand how pepole use it in the actual url, when you navigate to anotehr url (for example, ecommerce product page) - understand how to do this type of functionallity in your project
 // TODO: ask what more crucial and fundamental concept you need in a crud
-application
+// application
 //TODO: go over a reactjs, tailwind, and express.js open source, and learn about their client/server archeticture in terms of folder -
-also, learn how they build their components structure - you can also look on odin projet structure
+// also, learn how they build their components structure - you can also look on odin projet structure
 //TODO: go over claude projects article
+// -ask: do you need to explain the context each time to new projects chat
+// or you can just start developing and he can understand it from the project knolwedge and files?
 // TODO: Invent a characther:
 // who is milo?
 // what is his characteristics? does he full of confidence?
