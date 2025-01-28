@@ -98,7 +98,7 @@ const updateJob = async (jobId, userId, updates) => {
   }
 };
 
-const deleteJob = async (jobId, userId) => {
+const deleteJobById = async (jobId, userId) => {
   try {
     const deletedJob = await pool.query(
       "DELETE FROM jobs WHERE id = $1 AND user_id = $2 RETURNING *",
@@ -111,5 +111,24 @@ const deleteJob = async (jobId, userId) => {
   }
 };
 
-const deleteAllJobs = async (userId) => {};
-module.exports = { createJob, getAllJobs, getJobById, updateJob };
+const deleteAllJobs = async (userId) => {
+  try {
+    const deletedJobs = await pool.query(
+      "DELETE FROM jobs WHERE user_id = $1 RETURNING *",
+      [userId]
+    );
+
+    return deletedJobs.rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  createJob,
+  getAllJobs,
+  getJobById,
+  updateJob,
+  deleteJobById,
+  deleteAllJobs,
+};

@@ -50,6 +50,20 @@ const validateJobEntry = async (req, res, next) => {
     req.body.applicationDate = formattedDate;
   }
 
+  // maybe add stuff to notes.
+  if (notes) {
+    // Trim whitespace
+    const trimmedNotes = notes.trim();
+
+    // Check length (for example, max 1000 characters)
+    if (trimmedNotes.length > 1000) {
+      const error = new Error("הערות לא יכולות להיות ארוכות מ-1000 תווים");
+      error.status = 400;
+      throw error;
+    }
+    req.body.notes = trimmedNotes;
+  }
+
   next();
 };
 

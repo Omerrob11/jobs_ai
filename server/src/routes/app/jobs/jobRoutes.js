@@ -10,6 +10,7 @@ const {
   getJobsList,
   getJob,
   patchJob,
+  deleteJob,
 } = require("../../../controllers/jobsController");
 module.exports = jobsRouter;
 
@@ -31,3 +32,7 @@ jobsRouter.get("/:id", getJob);
 // the request from the fronend will just be to patch
 // we need the id of job
 jobsRouter.patch("/:id", validateJobUpdate, patchJob);
+
+jobsRouter.delete("/:id", deleteJob);
+
+// add delete all route maybe if you want

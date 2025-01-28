@@ -8,3 +8,9 @@ How to start: bottom-up approach:
 - go to controllers
 - than go to middlewars
 - than go to routes
+
+
+moodels:
+"model" refers to any function/code that directly 
+interacts with our data/database
+

@@ -28,3 +28,9 @@ javascriptCopy// Frontend (React handles routing and rendering)
 app.post("/api/auth/register", validateInput, checkExistingUser, ...);
 
 
+
+FRONTEND VALIDATION IS NEEDED:
+- JS can be disabled
+- someone can use our db as well
+- instant feedback to user.
+- you can never trust client side data-its important feature

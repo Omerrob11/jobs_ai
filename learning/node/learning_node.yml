@@ -189,3 +189,19 @@ before main jobs happen
 middlware usage mainly for:
 - validation
 - data sanitization / formating
+
+
+.json():
+
+The .json() method in the context of Express/fetch is different:
+
+For Express's express.json():
+It's middleware that automatically parses JSON strings in incoming 
+requests into JavaScript objects
+For fetch's response.json(): 
+It takes a Response stream and reads it to completion, 
+then parses the JSON text into a JavaScript object
+
+If you want to convert a JavaScript object to JSON text, 
+you always use JSON.stringify(). The .json() methods in Express and 
+fetch are for handling HTTP request/response data specifically.

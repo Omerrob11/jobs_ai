@@ -5,6 +5,8 @@ const {
   getAllJobs,
   getJobById,
   updateJob,
+  deleteJobById,
+  deleteAllJobs,
 } = require("../models/jobsModel");
 
 // controllers should have http verb based names - pust,get,put
@@ -173,4 +175,47 @@ const patchJob = async (req, res, next) => {
   // what validation we need here?
   // what if the query didn't find anything for example?
 };
-module.exports = { postJob, getJobsList, getJob, patchJob };
+
+const deleteJob = async (req, res, next) => {
+  try {
+    const jobId = +req.params.id;
+    const userId = req.user.userId;
+
+    if (isNaN(jobId)) {
+      return res.status(400).json({
+        success: false,
+        message: "מזהה משרה לא תקין",
+        error: "Job ID must be a number",
+      });
+    }
+    const deletedJob = await deleteJobById(jobId, userId);
+
+    if (!deletedJob) {
+      return res.status(404).json({
+        success: false,
+        message: "המשרה שניסית למחוק לא נמצאה",
+        data: { jobId },
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "המשרה נמחקה בהצלחה",
+      data: {
+        job: deletedJob,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "שגיאה במחיקת המשרה",
+      error: error.message,
+    });
+  }
+};
+
+const deleteJobList = async (req, res, next) => {
+  // do that like get all job list
+  // and add the route
+};
+module.exports = { postJob, getJobsList, getJob, patchJob, deleteJob };
