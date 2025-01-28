@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import KanbanHeader from "../../components/jobs/Header";
 import JobCard from "../../components/jobs/JobCard";
@@ -20,6 +20,20 @@ const KanbanBoard = () => {
     דחייה: "rejected",
   };
 
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await jobService.fetchAllJobs();
+        console.log("Jobs loaded from server:", response);
+        setJobs(response.data.jobs);
+      } catch (error) {
+        setError(error.message || "Error loading jobs");
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
   const handleAddJob = async (jobData) => {
     try {
       const response = await jobService.addJobToDb(jobData);
@@ -39,8 +53,6 @@ const KanbanBoard = () => {
 
   // Get jobs for a specific column
   const getColumnJobs = (column) => {
-    console.log("Filtering for column:", column);
-    console.log("Looking for status:", columnsToEnglish[column]);
     return jobs.filter((job) => job.status === columnsToEnglish[column]);
   };
 
