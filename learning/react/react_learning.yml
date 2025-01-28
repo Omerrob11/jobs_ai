@@ -34,3 +34,13 @@ FRONTEND VALIDATION IS NEEDED:
 - someone can use our db as well
 - instant feedback to user.
 - you can never trust client side data-its important feature
+
+
+Backend vs frontend:
+
+The backend (your Express server) and frontend (your React app) are completely independent. 
+They communicate over HTTP, but they don't need to be "connected" in any special way. 
+Here's how it works
+- backend is a sever on port 3000, that listep to http request
+putting stuff in the broswer is just a get requests
+requests can come from broswer, postman, or even just curl command or react app

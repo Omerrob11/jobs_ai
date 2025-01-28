@@ -112,6 +112,7 @@ const AddJobForm = ({ onSubmit, onClose }) => {
               <option value="ראיונות">ראיונות</option>
               <option value="הצעה">הצעה</option>
               <option value="עבודות שנשמרו">עבודות שנשמרו</option>
+              <option value="דחייה">דחייה</option>
             </select>
           </div>
 

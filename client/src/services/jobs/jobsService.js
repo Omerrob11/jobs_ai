@@ -1,5 +1,9 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
+// service names:
+// HTTP verb based: getJobs, postJob, deleteJob
+// Operation based: fetchJobs, createJob, removeJob (db operations)
+// usually go for operation, as this is what you want to do
 export const jobService = {
   async addJobToDb(jobData) {
     console.log(jobData);
@@ -35,15 +39,36 @@ export const jobService = {
       throw error;
     }
   },
+
+  async fetchAllJobs() {
+    try {
+      const response = await fetch(`${API_URL}/app/jobs`, {
+        method: "GET",
+        // headres: the server response with this content type
+        //if you type it, you will receive json, and display it as text
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      // response.ok not throwing error
+      // meaning we won't throw error if we get a "Bad request"
+      if (!response.ok) {
+        throw new Error(data.error || "משהו השתבש בטעינת כל העבודות");
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 /*
 question to ask to claude:
-why do we need to use env variable for the api url? why we need to hide it?
-
-how can we make the jobService without objects? what other oppritunities to design it we have? maybe just exports indivudual functions? what else?
-
-
 next project will be very short, about a week, and we will focus on:
 project flow:
 
@@ -57,3 +82,11 @@ dev:
 - use the stuff you learned from the odin project articles
 
 */
+// what happen if we type:
+// ourappdomain/app/jobs in the url? well, its supposed to make a get request
+// to here, meaning it should get all jobs
+// but what happen if i go to some url in the web
+// it make a get request
+// but what if that url is not responsible for delivering html
+// but for delivering data from db like in our case
+// what is acutally happening?

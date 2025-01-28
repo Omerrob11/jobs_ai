@@ -11,12 +11,13 @@ const KanbanBoard = () => {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
 
-  const columns = ["הצעה", "ראיונות", "עבודות שנשמרו", "הוגשו"];
+  const columns = ["הצעה", "ראיונות", "עבודות שנשמרו", "הוגשו", "דחייה"];
   const columnsToEnglish = {
     הצעה: "offer",
     ראיונות: "interviewing",
     "עבודות שנשמרו": "wishlist",
     הוגשו: "applied",
+    דחייה: "rejected",
   };
 
   const handleAddJob = async (jobData) => {
