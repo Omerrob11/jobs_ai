@@ -24,7 +24,7 @@ const KanbanBoard = () => {
     const fetchJobs = async () => {
       try {
         const response = await jobService.fetchAllJobs();
-        console.log("Jobs loaded from server:", response);
+        console.log("Initial jobs from server:", response.data); // Let's see exactly what we get
         setJobs(response.data.jobs);
       } catch (error) {
         setError(error.message || "Error loading jobs");
@@ -38,10 +38,9 @@ const KanbanBoard = () => {
     try {
       const response = await jobService.addJobToDb(jobData);
       // If successful, add to jobs state
+      console.log("New job response:", response); // Let's see what we get back when adding
 
-      console.log(response.message);
       setJobs((prevJobs) => [...prevJobs, response.job]);
-      console.log("Current jobs after adding:", jobs);
 
       setIsAddingJob(false);
       setError("");
@@ -53,9 +52,31 @@ const KanbanBoard = () => {
 
   // Get jobs for a specific column
   const getColumnJobs = (column) => {
-    return jobs.filter((job) => job.status === columnsToEnglish[column]);
+    const filteredJobs = jobs.filter(
+      (job) => job.status === columnsToEnglish[column]
+    );
+    return filteredJobs;
+    // return jobs.filter((job) => job.status === columnsToEnglish[column]);
   };
 
+  const handleDeleteJob = async (jobId) => {
+    if (!jobId) {
+      console.log(jobId);
+      setError("לא ניתן למחוק משרה זו - אין מזהה משרה");
+      return;
+    }
+    try {
+      const response = await jobService.deleteJob(jobId);
+      // remove it from the front end as well if we deleted
+      setJobs(jobs.filter((job) => job.id !== jobId));
+
+      //deleted job from the db
+      console.log(response);
+    } catch (error) {
+      setError(error.message || "אירעה שגיאה במחיקת המשרה");
+    }
+  };
+  const arrowlol = () => {};
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <KanbanHeader onAddJob={() => setIsAddingJob(true)} />
@@ -85,12 +106,20 @@ const KanbanBoard = () => {
 
               {/* Job Cards */}
               <div className="space-y-3">
-                {getColumnJobs(column).map((job) => (
+                {getColumnJobs(column).map((job, index) => (
                   <JobCard
-                    key={job.id}
+                    // i think keys should be from db, so its good
+
+                    key={job.id || `temp-${index}`} // Fallback to index if no id
+                    id={job.id}
                     title={job.position}
                     company={job.companyName}
                     daysAgo={3} // You might want to calculate this from job.created_at
+                    // creating a function that will only execute when called
+                    // we just pass a function
+                    // onDelete={function() { handleDeleteJob(job.id) }}
+                    // we needto pass a function reference, not to execute
+                    onDelete={() => handleDeleteJob(job.id)} // Only try to delete if we have an id
                   />
                 ))}
               </div>

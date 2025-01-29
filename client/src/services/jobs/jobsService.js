@@ -65,6 +65,28 @@ export const jobService = {
       throw error;
     }
   },
+
+  async deleteJob(jobId) {
+    try {
+      const response = await fetch(`${API_URL}/app/jobs/${jobId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "שגיאה במחיקת משרה");
+      }
+      return data;
+      // i need the job id
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 /*

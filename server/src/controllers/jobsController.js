@@ -33,13 +33,14 @@ const postJob = async (req, res, next) => {
 
     res.status(201).json({
       message: "הוספת משרה חדשה בהצלחה",
-      job: {
-        companyName: newJob.companyName,
-        position: newJob.position,
-        status: newJob.status,
-        applicationDate: newJob.applicationDate,
-        notes: newJob.notes,
-      },
+      // job: {
+      //   companyName: newJob.companyName,
+      //   position: newJob.position,
+      //   status: newJob.status,
+      //   applicationDate: newJob.applicationDate,
+      //    notes: newJob.notes,
+      // },
+      job: newJob,
     });
     console.log("here we good?");
 
