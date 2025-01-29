@@ -5,18 +5,33 @@ import "./App.css";
 import { Login } from "./pages/auth/login";
 import { SignUp } from "./pages/auth/signup";
 // import { KanbanBoard } from "./pages/jobs/KanbanBoard";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import { authService } from "./services/auth/authService";
 import KanbanBoard from "./pages/jobs/KanbanBoard";
 function App() {
-  const [count, setCount] = useState(0);
+  const handleLogout = async () => {
+    try {
+      await authService.logoutUser();
+      window.location.href = "/login"; // Simple redirect
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <BrowserRouter>
       <div className="app">
-        <nav className="p-4">
+        <nav className="p-4 flex gap-4">
           <Link to="/login">Login</Link>
           <Link to="/signup">sign up</Link>
           <Link to="/kanban">Kan ban</Link>
+          <button onClick={handleLogout}>Logout</button>
         </nav>
 
         <Routes>
@@ -29,5 +44,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

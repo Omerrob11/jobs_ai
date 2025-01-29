@@ -227,6 +227,10 @@ cookies:
   if we respond with a cookie, its automatically save in the broswer of the clinet right? no need to do anything in the frontend.
 - it automatiaclly (The broswer), store the cookiets, and send it back with each requests
 
+
+creating new cookie:
+- cookie identified by their name
+- create a new one, and it will override existing cooie
 Verification of user after log in:
 
 - check if the cookie exists with the token
@@ -247,3 +251,9 @@ app.get('/auth/login', loginHandler);
 // Private routes - add the checkpoint
 app.get('/dashboard', verifyUser, dashboardHandler);
 app.get('/profile', verifyUser, profileHandler);
+
+
+logout flow:
+1. All protected routes check for the token cookie
+2. When we clear the cookie, those routes will fail the auth check
+3. User effectively can't access protected routes anymore

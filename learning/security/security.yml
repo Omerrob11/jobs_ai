@@ -33,3 +33,11 @@ Resource Attacks:
 
 Length check prevents database storage issues
 Length check prevents memory issues when processing large strings
+
+Getting information from client:
+- we get information from client and its ok - but we dont trust this information
+- we are validate this information in backend
+- the security come from the jwt authentication, database queries that check owenrships
+and input validation - where you validate the input in the backend
+- we do store some client information in state- but we need to,
+in order to know which one he wants to update

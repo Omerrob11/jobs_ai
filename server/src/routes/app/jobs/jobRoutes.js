@@ -37,16 +37,8 @@ jobsRouter.delete("/:id", deleteJob);
 
 /*
 TODO:
-- make an option to delete a job - by getting the job id (question how to do it, maybe it stored in jobs list or somwhere)
-  alltouh, its client information, we trust him to get the corrrect job id?
-  how can we get the correct job id without trust the client? is it even possible?
-  as the client must tell you the correct id... i dont think is possible
-  but it means, we trust the frontend to store the id somwhere to be avliable
-  in our app, how are we do that?
-- make an option to edit the job, and use the patch end point. also see that it is actually being edits
-- use the get one job http request somehow
 - create a log out endpoint and delete the cookie
-- deploy the app
-
-
+- deploy the app - use enviormental variables, production 
+vs non production enviorment
+  so you understand the difference between the two and how it works
 */

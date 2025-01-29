@@ -87,6 +87,30 @@ export const jobService = {
       throw error;
     }
   },
+
+  async editJob(jobId, fieldsToEdit) {
+    try {
+      const response = await fetch(`${API_URL}/app/jobs/${jobId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+        },
+        // the body will be that object
+        // than we extract it
+        body: JSON.stringify(fieldsToEdit),
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "שגיאה בעדכון משרה"); // Changed error message
+      }
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 /*

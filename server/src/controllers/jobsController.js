@@ -8,6 +8,7 @@ const {
   deleteJobById,
   deleteAllJobs,
 } = require("../models/jobsModel");
+const { JOB_STATUS } = require("../config/constants");
 
 // controllers should have http verb based names - pust,get,put
 // models should be action names, createjob, findjob, etc - they describe the db opertion
@@ -159,6 +160,12 @@ const patchJob = async (req, res, next) => {
         data: { jobId },
       });
     }
+
+    if (updatedJob.status) {
+      updatedJob.status = JOB_STATUS.dbToStatus[updatedJob.status];
+    }
+
+    console.log("Updated job from database:", updatedJob);
 
     res.status(200).json({
       success: true,

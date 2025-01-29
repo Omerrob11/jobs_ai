@@ -4,12 +4,14 @@ import KanbanHeader from "../../components/jobs/Header";
 import JobCard from "../../components/jobs/JobCard";
 import AddJobForm from "../../components/jobs/JobModal";
 import { jobService } from "../../services/jobs/jobsService";
+import EditJobForm from "../../components/jobs/EditModal";
 
 // on page load, fetch all jobs from db
 const KanbanBoard = () => {
   const [isAddingJob, setIsAddingJob] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState("");
+  const [editingJob, setEditingJob] = useState(null);
 
   const columns = ["הצעה", "ראיונות", "עבודות שנשמרו", "הוגשו", "דחייה"];
   const columnsToEnglish = {
@@ -76,7 +78,28 @@ const KanbanBoard = () => {
       setError(error.message || "אירעה שגיאה במחיקת המשרה");
     }
   };
-  const arrowlol = () => {};
+  const handleEditJob = async (updatedJobData) => {
+    try {
+      console.log("Sending update:", updatedJobData);
+      const response = await jobService.editJob(editingJob.id, updatedJobData);
+      console.log("Received response:", response);
+
+      // Only update if we have valid data
+      if (response?.data?.job) {
+        setJobs(
+          jobs.map((job) =>
+            job.id === editingJob.id ? response.data.job : job
+          )
+        );
+        setEditingJob(null);
+      } else {
+        throw new Error("Invalid response data");
+      }
+    } catch (error) {
+      console.error("Edit job error:", error);
+      setError(error.message || "שגיאה בעדכון המשרה");
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <KanbanHeader onAddJob={() => setIsAddingJob(true)} />
@@ -120,6 +143,7 @@ const KanbanBoard = () => {
                     // onDelete={function() { handleDeleteJob(job.id) }}
                     // we needto pass a function reference, not to execute
                     onDelete={() => handleDeleteJob(job.id)} // Only try to delete if we have an id
+                    onEdit={() => setEditingJob(job)}
                   />
                 ))}
               </div>
@@ -136,6 +160,16 @@ const KanbanBoard = () => {
             setIsAddingJob(false);
             setError(""); // Clear any errors when closing
           }}
+        />
+      )}
+
+      {/* some bugs here
+needs fix */}
+      {editingJob && (
+        <EditJobForm
+          job={editingJob}
+          onSubmit={handleEditJob}
+          onClose={() => setEditingJob(null)}
         />
       )}
     </div>

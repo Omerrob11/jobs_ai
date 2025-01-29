@@ -73,21 +73,25 @@ const validateJobUpdate = async (req, res, next) => {
   // status
   // updated_at
   const { companyName, position, status, updatedAt, notes } = req.body;
-
+  console.log(status);
   const updates = {};
 
   if (companyName) {
-    updates.companyName = companyName.trim();
+    updates.company_name = companyName.trim();
   }
 
   if (position) {
     updates.position = position.trim();
   }
 
-  const validHebrewStatuses = Object.keys(JOB_STATUS.statusToDb);
-
   if (status) {
+    console.log("Received status:", status); // Let's see what status we're getting
+    console.log("Valid statuses:", Object.keys(JOB_STATUS.statusToDb)); // And what we consider valid
+
+    const validHebrewStatuses = Object.keys(JOB_STATUS.statusToDb);
+
     if (!validHebrewStatuses.includes(status)) {
+      console.log("we go inside?");
       const error = new Error("סטטוס לא חוקי");
       error.status = 400;
       throw error;
@@ -95,22 +99,22 @@ const validateJobUpdate = async (req, res, next) => {
     updates.status = JOB_STATUS.statusToDb[status];
   }
 
-  if (updatedAt) {
-    // Split the date by '/': deconsturcting, split creates array
-    const [day, month, year] = updatedAt.split("/");
-    // Rearrange to YYYY-MM-DD format
-    const formattedDate = `${year}-${month}-${day}`;
+  // if (updatedAt) {
+  //   // Split the date by '/': deconsturcting, split creates array
+  //   const [day, month, year] = updatedAt.split("/");
+  //   // Rearrange to YYYY-MM-DD format
+  //   const formattedDate = `${year}-${month}-${day}`;
 
-    // Now check if it's valid
-    const dateObject = new Date(formattedDate);
-    if (dateObject.toString() === "Invalid Date") {
-      const error = new Error("תאריך לא תקין");
-      error.status = 400;
-      throw error;
-    }
+  //   // Now check if it's valid
+  //   const dateObject = new Date(formattedDate);
+  //   if (dateObject.toString() === "Invalid Date") {
+  //     const error = new Error("תאריך לא תקין");
+  //     error.status = 400;
+  //     throw error;
+  //   }
 
-    updates.updatedAt = formattedDate;
-  }
+  //   updates.updatedAt = formattedDate;
+  // }
 
   // defensive api - we can acess it through postman, curl commands, etc
   // bugs: if frontend send bugs

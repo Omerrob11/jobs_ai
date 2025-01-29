@@ -61,6 +61,27 @@ export const authService = {
       throw error;
     }
   },
+  async logoutUser() {
+    try {
+      const response = await fetch(`${API_URL}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+        // why we needed here capital C-T
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "שגיאה בהתנתקות");
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 // test user:

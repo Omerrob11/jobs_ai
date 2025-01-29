@@ -25,6 +25,7 @@ const {
 const {
   registerHandler,
   loginHandler,
+  logoutHandler,
 } = require("../../controllers/authController");
 // going to web broswer make get request, not post
 router.post(
@@ -42,6 +43,8 @@ router.post(
   generateToken,
   loginHandler
 );
+
+router.post("/logout", logoutHandler);
 
 router.get("/signin", (req, res) => {
   // the callback function is what happen after we go to /sign route

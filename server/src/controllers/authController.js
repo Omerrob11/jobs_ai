@@ -48,7 +48,7 @@ const loginHandler = async (req, res, next) => {
   // cookie - will send the jwt token we use to verify the user.
 
   // cookie will be send in the response header.
-  // Set-Cookie: token=eyJhbGciOiJIUzI1N...; HttpOnly; SameSite=Strict; Max-Age=259200000
+  // Set-Cookie: token=eyJhbGciOiJIUzI1N...;  HttpOnly; SameSite=Strict; Max-Age=259200000
 
   // testing, go and actually see that with the curl command
   res.json({
@@ -56,4 +56,12 @@ const loginHandler = async (req, res, next) => {
   });
 };
 
-module.exports = { registerHandler, loginHandler };
+const logoutHandler = async (req, res, next) => {
+  res.clearCookie("token");
+
+  res.json({ message: "התנתקת בהצלחה" });
+};
+
+module.exports = { registerHandler, loginHandler, logoutHandler };
+
+// i get a new cookie if i loge again
