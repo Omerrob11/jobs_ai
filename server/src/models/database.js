@@ -1,6 +1,7 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
+  // we break down connection details to dbto 4 parts
   // to connect to any db, youneed 4 keys of inormation
   user: process.env.DB_USER || "omermiloh", //user name
   password: process.env.DB_PASSWORD, // security code
@@ -9,6 +10,15 @@ const pool = new Pool({
   database: process.env.DB_NAME || "interview_prep", //specific database
 });
 
+const pool2 = new Pool({
+  // if te railway database url exists use this, otherwhy, use individual enviorment variable
+  // to connect to a db, we need a database url, to send it requests
+  // its called a database url - like a web url, needs protocol, host, port, name, etc
+  // then , we send that sql command through this url connection to the db
+  connectionString:
+    process.env.DATABASE_URL ||
+    `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+});
 // pool - give us abunch of connections to the database
 // so we could do a lot of operations simutanously
 // and when we query, we get a connection from the ppool to the db
