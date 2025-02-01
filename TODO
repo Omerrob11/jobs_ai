@@ -1,11 +1,4 @@
 // TODO:
-// set up authentication routs
-// configure database connecection
-
-// create registiration route
-// hash the password (bcrypt for hashing)
-// store the user
-
 // On form - need to sanitaize and validate:
 // anitization and validation out here
 
@@ -36,10 +29,7 @@
 // in the evening, working on your job -creating content and company webistes
 // look on other ways to use middlewares in express - and how others us it
 // go over on object methods, etc
-// TODO: check if a controller should return error, or pass it to the error midddleware
 //TODO: add some functionallity to use with query paramaters - understand how pepole use it in the actual url, when you navigate to anotehr url (for example, ecommerce product page) - understand how to do this type of functionallity in your project
-// TODO: ask what more crucial and fundamental concept you need in a crud
-// application
 //TODO: go over a reactjs, tailwind, and express.js open source, and learn about their client/server archeticture in terms of folder -
 // also, learn how they build their components structure - you can also look on odin projet structure
 //TODO: go over claude projects article

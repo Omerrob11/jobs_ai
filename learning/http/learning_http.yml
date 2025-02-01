@@ -56,7 +56,7 @@ Frontend: https://myapp.com (Origin A)
 Backend: https://api.myapp.com (Origin B)
 When a user visits your frontend (myapp.com), their browser makes requests to your backend (api.myapp.com). Without CORS configuration, these requests would be blocked.
 
-Why We Don't Allow All Users' URLs:
+Why We Don'yeat Allow All Users' URLs:
 // DANGEROUS ❌
 app.use(cors({ origin: '*' ));  // Allows ANY website to make requests
 
@@ -76,3 +76,11 @@ Domain:
 - its just a way to identify the website ip
 - we need to buy a domain, and deploy frontend and backend.
 we develop in local host, and production is a bit different
+
+
+client AND server relationship:
+- they communicate throuh HTTP requests
+- jwt token are one way to safely transmit the user information to the backend
+
+transmited information through the web:
+- is in text/binary form, not objects - we convert everything to json strings, headers included

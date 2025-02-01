@@ -23,6 +23,8 @@ JSON web tokens: JWT:
 - each user get a token, json web token, its like their own id
 - they use it with each requests, so we can identify it - it contain information about them - we will verify who they are, so we wont need password each requests
 - we send the jwt token in the request header.
+
+
   Without a secret key:
 
 Anyone could create a fake ticket (token) with any userId
@@ -107,7 +109,11 @@ Server doesn't store anything
 All user info is in the token itself
 Each request carries all needed information
 
-hash functions
+hash functions:
 
 - maps variable sized inputs to fixed size outputs
 - meaning take an arbirtary length, and maps it to a ceratin output
+
+cookies:
+- regular cookies can read both in the client and in the backend
+- httponly cookie can't read by javascript, only by the server

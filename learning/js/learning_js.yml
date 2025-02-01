@@ -34,3 +34,15 @@ Always:
 - use paramatized queries
 - trim whitespace
 - type matching: match the type they send you to what the database expect
+
+
+.env variables:
+These environment variables (process.env.*) are like a set of instructions that can change depending on where your application is running
+- if they run in production the variables might hold different values
+
+
+The main reasons we use environmental variables are:
+
+Security: Keep sensitive data (like database passwords) out of your code
+Flexibility: Change behavior without changing code
+Configuration: Manage different settings for different environments

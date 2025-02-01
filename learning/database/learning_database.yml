@@ -78,6 +78,8 @@ superuser:
 Database storage:
 When you run PostgreSQL locally, the data is stored on your computer's hard drive
 The actual data is stored in binary files that PostgreSQL manages
+
+
 In Production:
 
 Could be on a dedicated database server
@@ -85,6 +87,7 @@ Could be on a cloud service (like AWS RDS, Heroku Postgres)
 
 
 Database hirearchy:
+
 Blog Platform Example:
 
 One-to-Many Relationship: One user can have many jobs
@@ -117,7 +120,7 @@ for each request:
    return connection to pool
    
 
-   Database errrors:
+Database errrors:
    Connection issues - the database might be down or unreachable
 Constraint violations - like if we try to violate a foreign key constraint
 Data type mismatches - if we try to insert invalid data types
